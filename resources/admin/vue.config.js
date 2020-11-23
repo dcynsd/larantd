@@ -12,6 +12,15 @@ const buildDate = JSON.stringify(new Date().toLocaleString())
 const isUseCDN = process.env.IS_USE_CDN === 'true'
 const isAnalyz = process.env.IS_ANALYZ === 'true'
 
+const adminFolder = 'admin'
+const publicFolder = '../../public'
+
+const LiveReloadPlugin = require('webpack-livereload-plugin')
+
+function pathResolve() {
+  return path.resolve(__dirname, ...arguments)
+}
+
 function resolve (dir) {
   return path.join(__dirname, dir)
 }
@@ -44,6 +53,9 @@ const assetsCDN = {
 
 // vue.config
 const vueConfig = {
+  outputDir: pathResolve(publicFolder, adminFolder),
+  publicPath: '/' + adminFolder,
+
   configureWebpack: {
     plugins: [
       // Ignore all locale files of moment.js
@@ -53,7 +65,13 @@ const vueConfig = {
         GIT_HASH: JSON.stringify(getGitHash()),
         BUILD_DATE: buildDate,
       }),
+      new LiveReloadPlugin()
     ],
+    watchOptions: {
+      poll: (process.argv.indexOf('--poll') !== -1) ? 500 : false,
+      aggregateTimeout: 500,
+      ignored: /node_modules/
+    },
     resolve: {
       alias: {
         '@ant-design/icons/lib/dist$': resolve('./src/icons.js'),
@@ -107,6 +125,7 @@ const vueConfig = {
   devServer: {
     // development server port 8000
     port: 8000,
+    open: true,
     // mock serve
     before: app => {
       if (process.env.MOCK !== 'none' && process.env.HTTP_MOCK !== 'none') {
