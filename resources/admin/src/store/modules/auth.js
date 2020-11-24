@@ -94,10 +94,10 @@ const auth = {
     },
 
     // 刷新 token
-    RefreshToken({ commit }, token) {
+    RefreshToken ({ commit }, token) {
       storage.set(ACCESS_TOKEN, token)
       commit('SET_TOKEN', token)
-    }
+    },
 
   },
 }

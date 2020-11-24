@@ -48,48 +48,6 @@ export const asyncRouterMap = [
           },
         ],
       },
-      {
-        path: '/form',
-        name: 'form',
-        meta: {
-          keepAlive: true,
-          title: 'menu.form.default',
-          icon: 'video-camera',
-        },
-        component: RouteView,
-        children: [
-          {
-            path: '/form/basic-form',
-            name: 'basic-form',
-            meta: {
-              keepAlive: true,
-              icon: 'smile',
-              title: 'menu.form.basicform',
-            },
-            component: () => import(/* webpackChunkName: "about" */ '../views/form/basic-form'),
-          },
-          {
-            path: '/form/step-form',
-            name: 'step-form',
-            meta: {
-              keepAlive: true,
-              icon: 'smile',
-              title: 'menu.form.stepform',
-            },
-            component: () => import(/* webpackChunkName: "about" */ '../views/form/step-form'),
-          },
-          {
-            path: '/form/advanced-form',
-            name: 'advanced-form',
-            meta: {
-              keepAlive: true,
-              icon: 'smile',
-              title: 'menu.form.advancedform',
-            },
-            component: () => import(/* webpackChunkName: "about" */ '../views/form/advanced-form'),
-          },
-        ],
-      },
     ],
   },
   {

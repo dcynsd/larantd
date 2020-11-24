@@ -17,7 +17,7 @@ const publicFolder = '../../public'
 
 const LiveReloadPlugin = require('webpack-livereload-plugin')
 
-function pathResolve() {
+function pathResolve () {
   return path.resolve(__dirname, ...arguments)
 }
 
@@ -65,12 +65,12 @@ const vueConfig = {
         GIT_HASH: JSON.stringify(getGitHash()),
         BUILD_DATE: buildDate,
       }),
-      new LiveReloadPlugin()
+      new LiveReloadPlugin(),
     ],
     watchOptions: {
       poll: (process.argv.indexOf('--poll') !== -1) ? 500 : false,
       aggregateTimeout: 500,
-      ignored: /node_modules/
+      ignored: /node_modules/,
     },
     resolve: {
       alias: {

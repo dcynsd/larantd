@@ -17,7 +17,7 @@ export default {
   name: 'WelcomePage',
   methods: {
     showLoading () {
-      this.$loading.show({ tip: '3 秒后自动隐藏' })
+      this.$loading.show({ tip: '3秒后自动隐藏' })
 
       setTimeout(() => {
         this.$loading.hide()

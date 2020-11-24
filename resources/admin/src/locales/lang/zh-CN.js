@@ -1,6 +1,33 @@
 import exceptionLang from '@/views/exception/locales/zhCN'
 
 export default {
+  app: {
+    setting: {
+      navigationmode: '导航模式',
+      'content-width': '内容宽度',
+      fixedheader: '固定头',
+      fixedsidebar: '固定侧边栏',
+      weakmode: '色弱模式',
+      othersettings: '其它设置',
+      themecolor: '主题颜色',
+      pagestyle: '页面风格',
+      copy: '复制配置',
+      sidemenu: '侧菜单',
+      topmenu: '顶部菜单',
+      copyinfo: '复制成功',
+    },
+  },
+  'app.setting.pagestyle.light': '高亮',
+  'app.setting.pagestyle.dark': '暗黑',
+  'app.setting.pagestyle.realdark': '全黑',
+  'app.setting.themecolor.daybreak': '蓝色',
+  'app.setting.themecolor.dust': '红色',
+  'app.setting.themecolor.sunset': '日落色',
+  'app.setting.themecolor.volcano': '火山色',
+  'app.setting.themecolor.cyan': '青色',
+  'app.setting.themecolor.green': '绿色',
+  'app.setting.themecolor.geekblue': '极客蓝',
+  'app.setting.themecolor.purple': '紫色',
   navBar: {
     lang: '语言',
   },
