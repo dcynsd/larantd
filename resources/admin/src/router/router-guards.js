@@ -8,8 +8,8 @@ import { notification } from 'ant-design-vue'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-const allowList = ['login', 'register', 'registerResult'] // no redirect whitelist
-const loginRoutePath = '/user/login'
+const allowList = ['login'] // no redirect whitelist
+const loginRoutePath = '/auth/login'
 const defaultRoutePath = '/dashboard'
 
 router.beforeEach((to, from, next) => {
@@ -21,8 +21,8 @@ router.beforeEach((to, from, next) => {
       NProgress.done()
     } else {
       // check login user.roles is null
-      if (store.getters.roles.length === 0) {
-        store.dispatch('GetInfo').then(res => {
+      if (!store.getters.token) {
+        store.dispatch('GetMe').then(res => {
           const roles = res && res.role
           // generate dynamic router
           store.dispatch('GenerateRoutes', { roles }).then(() => {

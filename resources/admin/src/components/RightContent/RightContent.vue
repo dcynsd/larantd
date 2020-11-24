@@ -5,20 +5,20 @@
       :current-user="currentUser"
       :class="prefixCls"
     />
-    <select-lang :class="prefixCls" />
+    <!-- <select-lang :class="prefixCls" /> -->
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import AvatarDropdown from './AvatarDropdown'
-import SelectLang from '@/components/SelectLang'
+// import SelectLang from '@/components/SelectLang'
 
 export default {
   name: 'RightContent',
   components: {
     AvatarDropdown,
-    SelectLang,
+    // SelectLang,
   },
   props: {
     prefixCls: {

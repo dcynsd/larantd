@@ -7,8 +7,8 @@ export default {
   layouts: {
     usermenu: {
       dialog: {
-        title: '注销',
-        content: '要注销账户吗?',
+        title: '退出',
+        content: '确认要退出登录吗?',
       },
     },
   },

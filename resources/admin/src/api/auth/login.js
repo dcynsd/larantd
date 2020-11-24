@@ -1,48 +1,23 @@
 import request from '@/utils/request'
 
-/**
- * login func
- * parameter: {
- *     username: '',
- *     password: '',
- *     remember_me: true,
- *     captcha: '12345'
- * }
- * @param parameter
- * @returns {*}
- */
-export function login (parameter) {
+export function login (data) {
   return request({
-    url: '/login/account',
+    url: '/authorizations',
     method: 'post',
-    data: parameter,
+    data: data,
   })
 }
 
-export function getSmsCaptcha (parameter) {
+export function getMe () {
   return request({
-    url: '/message/sms',
-    method: 'post',
-    data: parameter,
-  })
-}
-
-export function getInfo () {
-  return request({
-    url: '/currentUser',
+    url: '/authorizations/me',
     method: 'get',
-    headers: {
-      'Content-Type': 'application/json;charset=UTF-8',
-    },
   })
 }
 
 export function logout () {
   return request({
-    url: '/logout',
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json;charset=UTF-8',
-    },
+    url: '/authorizations',
+    method: 'delete',
   })
 }

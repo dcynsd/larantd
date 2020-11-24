@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Admin\Requests;
+
+class {{modelName}}Request extends FormRequest
+{
+    public function rules()
+    {
+        return [];
+    }
+}

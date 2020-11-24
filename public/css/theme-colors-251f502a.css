@@ -1,0 +1,120 @@
+.user-layout-login .user-login-other .item-icon[data-v-0e0d6e88]:hover{ color: #1890ff}
+#nprogress .bar{ background: #1890ff}
+#nprogress .peg{ box-shadow: 0 0 10px #1890ff, 0 0 5px #1890ff}
+#nprogress .spinner-icon{ border-top-color: #1890ff; border-left-color: #1890ff}
+.ant-pro-global-header-index-right.ant-pro-global-header-index-dark .ant-pro-global-header-index-action:hover{ background: #1890ff}
+.ant-pro-global-header-index-right .ant-pro-account-avatar .antd-pro-global-header-index-avatar{ color: #1890ff}
+.ant-pro-basicLayout .trigger:hover{ color: #1890ff}
+.ant-pro-global-header .dark .action.opened,.ant-pro-global-header .dark .action:hover{ background: #1890ff}
+.ant-pro-setting-drawer-block-checbox-selectIcon{ color: #1890ff}
+.ant-pro-setting-drawer-block-checbox-selectIcon .action{ color: #1890ff}
+.ant-pro-setting-drawer-handle{ background: #1890ff}
+.ant-pro-sider-menu-sider.light .ant-pro-sider-menu-logo h1{ color: #1890ff}
+.ant-alert-info{ background-color: #e6f7ff; border: 1px solid #91d5ff}
+.ant-alert-info .ant-alert-icon{ color: #1890ff}
+.ant-breadcrumb a:hover{ color: #40a9ff}
+.ant-btn:focus:not(.ant-btn-primary):not(.ant-btn-danger),.ant-btn:hover:not(.ant-btn-primary):not(.ant-btn-danger){ color: #40a9ff; border-color: #40a9ff}
+.ant-btn.active:not(.ant-btn-primary):not(.ant-btn-danger),.ant-btn:active:not(.ant-btn-primary):not(.ant-btn-danger){ color: #096dd9; border-color: #096dd9}
+.ant-btn-primary{ background-color: #1890ff; border-color: #1890ff}
+.ant-btn-primary:focus,.ant-btn-primary:hover{ background-color: #40a9ff; border-color: #40a9ff}
+.ant-btn-primary.active,.ant-btn-primary:active{ background-color: #096dd9; border-color: #096dd9}
+.ant-btn-group .ant-btn-primary:not(:first-child):not(:last-child){ border-right-color: #40a9ff; border-left-color: #40a9ff}
+.ant-btn-group .ant-btn-primary:first-child:not(:last-child){ border-right-color: #40a9ff}
+.ant-btn-group .ant-btn-primary + .ant-btn-primary,.ant-btn-group .ant-btn-primary:last-child:not(:first-child){ border-left-color: #40a9ff}
+.ant-btn-ghost:focus,.ant-btn-ghost:hover{ color: #40a9ff; border-color: #40a9ff}
+.ant-btn-ghost.active,.ant-btn-ghost:active{ color: #096dd9; border-color: #096dd9}
+.ant-btn-dashed:focus,.ant-btn-dashed:hover{ color: #40a9ff; border-color: #40a9ff}
+.ant-btn-dashed.active,.ant-btn-dashed:active{ color: #096dd9; border-color: #096dd9}
+.ant-btn-link{ color: #1890ff}
+.ant-btn-link:focus,.ant-btn-link:hover{ color: #40a9ff; border-color: #40a9ff}
+.ant-btn-link.active,.ant-btn-link:active{ color: #096dd9; border-color: #096dd9}
+.ant-btn-background-ghost.ant-btn-primary{ color: #1890ff; border-color: #1890ff}
+.ant-btn-background-ghost.ant-btn-primary:focus,.ant-btn-background-ghost.ant-btn-primary:hover{ color: #40a9ff; border-color: #40a9ff}
+.ant-btn-background-ghost.ant-btn-primary.active,.ant-btn-background-ghost.ant-btn-primary:active{ color: #096dd9; border-color: #096dd9}
+.ant-btn-background-ghost.ant-btn-link{ color: #1890ff}
+.ant-btn-background-ghost.ant-btn-link:focus,.ant-btn-background-ghost.ant-btn-link:hover{ color: #40a9ff}
+.ant-btn-background-ghost.ant-btn-link.active,.ant-btn-background-ghost.ant-btn-link:active{ color: #096dd9}
+.ant-checkbox-input:focus + .ant-checkbox-inner,.ant-checkbox-wrapper:hover .ant-checkbox-inner,.ant-checkbox:hover .ant-checkbox-inner{ border-color: #1890ff}
+.ant-checkbox-checked::after{ border: 1px solid #1890ff}
+.ant-checkbox-checked .ant-checkbox-inner{ background-color: #1890ff; border-color: #1890ff}
+.ant-checkbox-indeterminate .ant-checkbox-inner::after{ background-color: #1890ff}
+.ant-dropdown-menu-item-selected,.ant-dropdown-menu-item-selected>a,.ant-dropdown-menu-submenu-title-selected,.ant-dropdown-menu-submenu-title-selected>a{ color: #1890ff; background-color: #e6f7ff}
+.ant-dropdown-menu-item:hover,.ant-dropdown-menu-submenu-title:hover{ background-color: #e6f7ff}
+.ant-dropdown-menu-submenu-selected .ant-dropdown-menu-submenu-title{ color: #1890ff}
+.ant-dropdown-menu-dark .ant-dropdown-menu-item-selected,.ant-dropdown-menu-dark .ant-dropdown-menu-item-selected:hover,.ant-dropdown-menu-dark .ant-dropdown-menu-item-selected>a{ background: #1890ff}
+.has-error .ant-transfer-list-search:not([disabled]):hover{ border-color: #40a9ff}
+.has-error .ant-transfer-list-search:not([disabled]):focus{ border-color: #40a9ff; box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2)}
+.is-validating.has-feedback .ant-form-item-children-icon{ color: #1890ff}
+.ant-input:hover{ border-color: #40a9ff}
+.ant-input:focus{ border-color: #40a9ff; box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2)}
+.ant-input-group-addon .ant-select-focused .ant-select-selection,.ant-input-group-addon .ant-select-open .ant-select-selection{ color: #1890ff}
+.ant-input-affix-wrapper:hover .ant-input:not(.ant-input-disabled){ border-color: #40a9ff}
+.ant-list-item-meta-title>a:hover{ color: #1890ff}
+.ant-menu-submenu-selected{ color: #1890ff}
+.ant-menu-item:active,.ant-menu-submenu-title:active{ background: #e6f7ff}
+.ant-menu-item>a:hover{ color: #1890ff}
+.ant-menu-item>.ant-badge>a:hover{ color: #1890ff}
+.ant-menu-item-active,.ant-menu-item:hover,.ant-menu-submenu-active,.ant-menu-submenu-title:hover,.ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open{ color: #1890ff}
+.ant-menu-item-selected{ color: #1890ff}
+.ant-menu-item-selected>a,.ant-menu-item-selected>a:hover{ color: #1890ff}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{ background-color: #e6f7ff}
+.ant-menu-submenu-inline>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after,.ant-menu-submenu-inline>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before,.ant-menu-submenu-vertical-left>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after,.ant-menu-submenu-vertical-left>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before,.ant-menu-submenu-vertical-right>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after,.ant-menu-submenu-vertical-right>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before,.ant-menu-submenu-vertical>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after,.ant-menu-submenu-vertical>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before{ background: linear-gradient(to right, #1890ff, #1890ff)}
+.ant-menu-vertical .ant-menu-submenu-selected,.ant-menu-vertical-left .ant-menu-submenu-selected,.ant-menu-vertical-right .ant-menu-submenu-selected{ color: #1890ff}
+.ant-menu-vertical .ant-menu-submenu-selected>a,.ant-menu-vertical-left .ant-menu-submenu-selected>a,.ant-menu-vertical-right .ant-menu-submenu-selected>a{ color: #1890ff}
+.ant-menu-horizontal > .ant-menu-item-active,.ant-menu-horizontal > .ant-menu-item-open,.ant-menu-horizontal > .ant-menu-item-selected,.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover,.ant-menu-horizontal > .ant-menu-submenu-active,.ant-menu-horizontal > .ant-menu-submenu-open,.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected,.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover{ color: #1890ff; border-bottom: 2px solid #1890ff}
+.ant-menu-horizontal:not(ant-menu-light):not(.ant-menu-dark) > .ant-menu-item > a:hover{ color: #1890ff}
+.ant-menu-horizontal:not(ant-menu-light):not(.ant-menu-dark) > .ant-menu-item-selected > a{ color: #1890ff}
+.ant-menu-inline .ant-menu-item::after,.ant-menu-vertical .ant-menu-item::after,.ant-menu-vertical-left .ant-menu-item::after,.ant-menu-vertical-right .ant-menu-item::after{ border-right: 3px solid #1890ff}
+.ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected,.ant-menu.ant-menu-dark .ant-menu-item-selected{ background-color: #1890ff}
+.ant-message-info .anticon,.ant-message-loading .anticon{ color: #1890ff}
+.ant-modal-confirm-info .ant-modal-confirm-body>.anticon{ color: #1890ff}
+.anticon.ant-notification-notice-icon-info{ color: #1890ff}
+.ant-page-header-back-button{ color: #1890ff}
+.ant-page-header-back-button:focus,.ant-page-header-back-button:hover{ color: #40a9ff}
+.ant-page-header-back-button:active{ color: #096dd9}
+.ant-pagination-item:focus,.ant-pagination-item:hover{ border-color: #1890ff}
+.ant-pagination-item:focus a,.ant-pagination-item:hover a{ color: #1890ff}
+.ant-pagination-item-active{ border-color: #1890ff}
+.ant-pagination-item-active a{ color: #1890ff}
+.ant-pagination-item-active:focus,.ant-pagination-item-active:hover{ border-color: #40a9ff}
+.ant-pagination-item-active:focus a,.ant-pagination-item-active:hover a{ color: #40a9ff}
+.ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-link-icon,.ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-link-icon{ color: #1890ff}
+.ant-pagination-next:hover a,.ant-pagination-prev:hover a{ border-color: #40a9ff}
+.ant-pagination-next:focus .ant-pagination-item-link,.ant-pagination-next:hover .ant-pagination-item-link,.ant-pagination-prev:focus .ant-pagination-item-link,.ant-pagination-prev:hover .ant-pagination-item-link{ color: #1890ff; border-color: #1890ff}
+.ant-pagination-options-quick-jumper input:hover{ border-color: #40a9ff}
+.ant-pagination-options-quick-jumper input:focus{ border-color: #40a9ff; box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2)}
+.ant-pagination-simple .ant-pagination-simple-pager input:hover{ border-color: #1890ff}
+.ant-result-info .ant-result-icon>.anticon{ color: #1890ff}
+.ant-select-selection:hover{ border-color: #40a9ff}
+.ant-select-focused .ant-select-selection,.ant-select-selection:active,.ant-select-selection:focus{ border-color: #40a9ff; box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2)}
+.ant-select-open .ant-select-selection{ border-color: #40a9ff; box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2)}
+.ant-select-dropdown-menu-item:hover:not(.ant-select-dropdown-menu-item-disabled){ background-color: #e6f7ff}
+.ant-select-dropdown-menu-item-active:not(.ant-select-dropdown-menu-item-disabled){ background-color: #e6f7ff}
+.ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item-selected .ant-select-selected-icon,.ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item-selected:hover .ant-select-selected-icon{ color: #1890ff}
+.ant-spin{ color: #1890ff}
+.ant-spin-dot-item{ background-color: #1890ff}
+a{ color: #1890ff}
+a:hover{ color: #40a9ff}
+a:active{ color: #096dd9}
+::-moz-selection{ background: #1890ff}
+::selection{ background: #1890ff}
+html{ --antd-wave-shadow-color: #1890ff}
+.ant-click-animating-node,[ant-click-animating-without-extra-node='true']::after{ box-shadow: 0 0 0 0 #1890ff}
+@-webkit-keyframes waveEffect{100%{ box-shadow: 0 0 0 #1890ff}}
+@keyframes waveEffect{100%{ box-shadow: 0 0 0 #1890ff}}
+.ant-switch-checked.ant-switch-loading .ant-switch-loading-icon{ color: #1890ff}
+.ant-switch:focus{ box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2)}
+.ant-switch-checked{ background-color: #1890ff}
+.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active{ color: #1890ff}
+.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-disabled{ color: #1890ff}
+.ant-tabs-extra-content .ant-tabs-new-tab:hover{ color: #1890ff; border-color: #1890ff}
+.ant-tabs .ant-tabs-card-bar.ant-tabs-bottom-bar .ant-tabs-tab-active{ color: #1890ff}
+.ant-tabs-ink-bar{ background-color: #1890ff}
+.ant-tabs-nav .ant-tabs-tab:hover{ color: #40a9ff}
+.ant-tabs-nav .ant-tabs-tab:active{ color: #096dd9}
+.ant-tabs-nav .ant-tabs-tab-active{ color: #1890ff}
+.ant-tag-checkable:not(.ant-tag-checkable-checked):hover{ color: #1890ff}
+.ant-tag-checkable-checked{ background-color: #1890ff}
+.ant-tag-checkable:active{ background-color: #096dd9}
+.ant-tag-blue{ color: #1890ff; background: #e6f7ff; border-color: #91d5ff}
+.ant-tag-blue-inverse{ background: #1890ff; border-color: #1890ff}

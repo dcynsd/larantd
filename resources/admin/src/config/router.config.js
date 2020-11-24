@@ -7,14 +7,14 @@ const RouteView = {
 
 export const constantRouterMap = [
   {
-    path: '/user',
-    name: 'user',
+    path: '/auth',
+    name: 'auth',
     component: UserLayout,
     children: [
       {
-        path: '/user/login',
+        path: '/auth/login',
         name: 'login',
-        component: () => import('@/views/user/Login'),
+        component: () => import('@/views/auth/Login'),
       },
     ],
   },
@@ -38,13 +38,13 @@ export const asyncRouterMap = [
         name: 'dashboard',
         redirect: '/dashboard/welcome',
         component: RouteView,
-        meta: { title: 'menu.dashboard.default', keepAlive: true, icon: 'dashboard', permission: ['dashboard'] },
+        meta: { title: 'menu.dashboard.default', keepAlive: true, icon: 'dashboard' },
         children: [
           {
             path: '/dashboard/welcome',
             name: 'Welcome',
             component: () => import('@/views/dashboard/Welcome'),
-            meta: { title: 'menu.dashboard.welcome', keepAlive: false, permission: ['dashboard'] },
+            meta: { title: 'menu.dashboard.welcome', keepAlive: false },
           },
         ],
       },
