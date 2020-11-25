@@ -1,5 +1,5 @@
 import T from 'ant-design-vue/es/table/Table'
-import _ from 'lodash'
+import get from 'lodash.get'
 
 export default {
   data () {
@@ -11,33 +11,33 @@ export default {
 
       localLoading: false,
       localDataSource: [],
-      localPagination: Object.assign({}, this.pagination),
+      localPagination: Object.assign({}, this.pagination)
     }
   },
   props: Object.assign({}, T.props, {
     rowKey: {
       type: [String, Function],
-      default: 'key',
+      default: 'key'
     },
     data: {
       type: Function,
-      required: true,
+      required: true
     },
     pageNum: {
       type: Number,
-      default: 1,
+      default: 1
     },
     pageSize: {
       type: Number,
-      default: 10,
+      default: 10
     },
     showSizeChanger: {
       type: Boolean,
-      default: true,
+      default: true
     },
     size: {
       type: String,
-      default: 'default',
+      default: 'default'
     },
     /**
      * alert: {
@@ -47,20 +47,20 @@ export default {
      */
     alert: {
       type: [Object, Boolean],
-      default: null,
+      default: null
     },
     rowSelection: {
       type: Object,
-      default: null,
+      default: null
     },
     /** @Deprecated */
     showAlertInfo: {
       type: Boolean,
-      default: false,
+      default: false
     },
     showPagination: {
       type: String | Boolean,
-      default: 'auto',
+      default: 'auto'
     },
     /**
      * enable page URI mode
@@ -73,8 +73,8 @@ export default {
      */
     pageURI: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   }),
   watch: {
     'localPagination.current' (val) {
@@ -82,8 +82,8 @@ export default {
         ...this.$route,
         name: this.$route.name,
         params: Object.assign({}, this.$route.params, {
-          pageNo: val,
-        }),
+          pageNo: val
+        })
       })
       // change pagination, reset total data
       this.needTotalList = this.initTotalList(this.columns)
@@ -92,19 +92,19 @@ export default {
     },
     pageNum (val) {
       Object.assign(this.localPagination, {
-        current: val,
+        current: val
       })
     },
     pageSize (val) {
       Object.assign(this.localPagination, {
-        pageSize: val,
+        pageSize: val
       })
     },
     showSizeChanger (val) {
       Object.assign(this.localPagination, {
-        showSizeChanger: val,
+        showSizeChanger: val
       })
-    },
+    }
   },
   created () {
     const { pageNo } = this.$route.params
@@ -112,7 +112,7 @@ export default {
     this.localPagination = ['auto', true].includes(this.showPagination) && Object.assign({}, this.localPagination, {
       current: localPageNum,
       pageSize: this.pageSize,
-      showSizeChanger: this.showSizeChanger,
+      showSizeChanger: this.showSizeChanger
     }) || false
     this.needTotalList = this.initTotalList(this.columns)
     this.loadData()
@@ -125,7 +125,7 @@ export default {
      */
     refresh (bool = false) {
       bool && (this.localPagination = Object.assign({}, {
-        current: 1, pageSize: this.pageSize,
+        current: 1, pageSize: this.pageSize
       }))
       this.loadData()
     },
@@ -138,19 +138,19 @@ export default {
     loadData (pagination, filters, sorter) {
       this.localLoading = true
       const parameter = Object.assign({
-        pageNo: (pagination && pagination.current) ||
+        page: (pagination && pagination.current) ||
           this.showPagination && this.localPagination.current || this.pageNum,
-        pageSize: (pagination && pagination.pageSize) ||
-          this.showPagination && this.localPagination.pageSize || this.pageSize,
+        limit: (pagination && pagination.pageSize) ||
+          this.showPagination && this.localPagination.pageSize || this.pageSize
       },
       (sorter && sorter.field && {
-        sortField: sorter.field,
+        sortField: sorter.field
       }) || {},
       (sorter && sorter.order && {
-        sortOrder: sorter.order,
+        sortOrder: sorter.order
       }) || {}, {
-        ...filters,
-      },
+        ...filters
+      }
       )
       const result = this.data(parameter)
       // 对接自己的通用数据接口需要修改下方代码中的 r.pageNo, r.totalCount, r.data
@@ -158,11 +158,11 @@ export default {
       if ((typeof result === 'object' || typeof result === 'function') && typeof result.then === 'function') {
         result.then(r => {
           this.localPagination = this.showPagination && Object.assign({}, this.localPagination, {
-            current: r.pageNo, // 返回结果中的当前分页数
-            total: r.totalCount, // 返回结果中的总记录数
+            current: r.meta.pagination.current_page, // 返回结果中的当前分页数
+            total: r.meta.pagination.total, // 返回结果中的总记录数
             showSizeChanger: this.showSizeChanger,
             pageSize: (pagination && pagination.pageSize) ||
-              this.localPagination.pageSize,
+              this.localPagination.pageSize
           }) || false
           // 为防止删除数据后导致页面当前页面数据长度为 0 ,自动翻页到上一页
           if (r.data.length === 0 && this.showPagination && this.localPagination.current > 1) {
@@ -191,7 +191,7 @@ export default {
         if (column.needTotal) {
           totalList.push({
             ...column,
-            total: 0,
+            total: 0
           })
         }
       })
@@ -210,9 +210,9 @@ export default {
         return {
           ...item,
           total: selectedRows.reduce((sum, val) => {
-            const total = sum + parseInt(_.get(val, item.dataIndex))
+            const total = sum + parseInt(get(val, item.dataIndex))
             return isNaN(total) ? 0 : total
-          }, 0),
+          }, 0)
         }
       })
     },
@@ -264,7 +264,7 @@ export default {
           </template>
         </a-alert>
       )
-    },
+    }
   },
 
   render () {
@@ -288,7 +288,7 @@ export default {
             onChange: (selectedRowKeys, selectedRows) => {
               this.updateSelect(selectedRowKeys, selectedRows)
               typeof this[k].onChange !== 'undefined' && this[k].onChange(selectedRowKeys, selectedRows)
-            },
+            }
           }
           return props[k]
         } else if (!this.rowSelection) {
@@ -312,5 +312,5 @@ export default {
         { table }
       </div>
     )
-  },
+  }
 }

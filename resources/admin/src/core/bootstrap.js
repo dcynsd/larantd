@@ -7,7 +7,7 @@ import {
   TOGGLE_FIXED_HEADER,
   TOGGLE_FIXED_SIDEBAR, TOGGLE_HIDE_HEADER,
   TOGGLE_LAYOUT, TOGGLE_NAV_THEME, TOGGLE_WEAK,
-  TOGGLE_COLOR, TOGGLE_MULTI_TAB,
+  TOGGLE_COLOR, TOGGLE_MULTI_TAB
 } from '@/store/mutation-types'
 import { printANSI } from '@/utils/screenLog'
 import defaultSettings from '@/config/defaultSettings'
@@ -26,6 +26,6 @@ export default function Initializer () {
   store.commit(TOGGLE_MULTI_TAB, storage.get(TOGGLE_MULTI_TAB, defaultSettings.multiTab))
   store.commit('SET_TOKEN', storage.get(ACCESS_TOKEN))
 
-  store.dispatch('setLang', storage.get(APP_LANGUAGE, 'zh-CN'))
+  store.dispatch('setLang', storage.get(APP_LANGUAGE, 'en-US'))
   // last step
 }

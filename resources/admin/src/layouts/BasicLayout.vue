@@ -1,96 +1,106 @@
 <template>
   <pro-layout
-    :title="siteTitle"
     :menus="menus"
     :collapsed="collapsed"
-    :media-query="query"
-    :handle-media-query="handleMediaQuery"
-    :handle-collapse="handleCollapse"
-    :i18n-render="i18nRender"
-    v-bind="{
-      theme,
-      layout,
-      isMobile,
-      contentWidth,
-      fixedHeader,
-      fixSiderbar: fixedSidebar,
-    }"
+    :mediaQuery="query"
+    :isMobile="isMobile"
+    :handleMediaQuery="handleMediaQuery"
+    :handleCollapse="handleCollapse"
+    :i18nRender="i18nRender"
+    v-bind="settings"
   >
+    <!-- Ads begin
+      广告代码 真实项目中请移除
+      production remove this Ads
+    -->
+    <ads v-if="isProPreviewSite && !collapsed"/>
+    <!-- Ads end -->
+
+    <!-- 1.0.0+ 版本 pro-layout 提供 API，
+          我们推荐使用这种方式进行 LOGO 和 title 自定义
+    -->
     <template v-slot:menuHeaderRender>
       <div>
-        <img src="~@/assets/logo.svg" :alt="siteTitle">
-        <h1>{{ siteTitle }}</h1>
+        <logo-svg />
+        <h1>{{ title }}</h1>
       </div>
     </template>
+
+    <setting-drawer :settings="settings" @change="handleSettingChange" />
     <template v-slot:rightContentRender>
-      <right-content
-        :top-menu="layout === 'topmenu'"
-        :is-mobile="isMobile"
-        :theme="theme"
-      />
+      <right-content :top-menu="settings.layout === 'topmenu'" :is-mobile="isMobile" :theme="settings.theme" />
     </template>
     <template v-slot:footerRender>
       <global-footer />
     </template>
-    <setting-drawer
-      :settings="{
-        layout,
-        theme,
-        contentWidth,
-        primaryColor,
-        colorWeak,
-        fixedHeader,
-        fixSiderbar: fixedSidebar,
-        hideHintAlert: false,
-        hideCopyButton: false
-      }"
-      @change="handleSettingChange"
-    />
     <router-view />
   </pro-layout>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { RightContent, GlobalFooter } from '@/components'
-import { SettingDrawer, updateTheme, updateColorWeak } from '@ant-design-vue/pro-layout'
+import { SettingDrawer, updateTheme } from '@ant-design-vue/pro-layout'
 import { i18nRender } from '@/locales'
-import { baseMixin } from '@/store/app-mixin'
-import {
-  CONTENT_WIDTH_TYPE,
-  SIDEBAR_TYPE, TOGGLE_COLOR,
-  TOGGLE_CONTENT_WIDTH, TOGGLE_FIXED_HEADER,
-  TOGGLE_FIXED_SIDEBAR,
-  TOGGLE_LAYOUT,
-  TOGGLE_MOBILE_TYPE, TOGGLE_NAV_THEME, TOGGLE_WEAK,
-} from '@/store/mutation-types'
+import { mapState } from 'vuex'
+import { CONTENT_WIDTH_TYPE, SIDEBAR_TYPE, TOGGLE_MOBILE_TYPE } from '@/store/mutation-types'
+
 import defaultSettings from '@/config/defaultSettings'
+import RightContent from '@/components/GlobalHeader/RightContent'
+import GlobalFooter from '@/components/GlobalFooter'
+import Ads from '@/components/Other/CarbonAds'
+import LogoSvg from '../assets/logo.svg?inline'
 
 export default {
   name: 'BasicLayout',
-  mixins: [baseMixin], // this[xxx] store value mixin, see this file
+  components: {
+    SettingDrawer,
+    RightContent,
+    GlobalFooter,
+    LogoSvg,
+    Ads
+  },
   data () {
-    this.siteTitle = defaultSettings.title
     return {
+      // preview.pro.antdv.com only use.
+      isProPreviewSite: process.env.VUE_APP_PREVIEW === 'true' && process.env.NODE_ENV !== 'development',
+      // end
+
       // base
       menus: [],
       // 侧栏收起状态
       collapsed: false,
+      title: defaultSettings.title,
+      settings: {
+        // 布局类型
+        layout: defaultSettings.layout, // 'sidemenu', 'topmenu'
+        // CONTENT_WIDTH_TYPE
+        contentWidth: defaultSettings.layout === 'sidemenu' ? CONTENT_WIDTH_TYPE.Fluid : defaultSettings.contentWidth,
+        // 主题 'dark' | 'light'
+        theme: defaultSettings.navTheme,
+        // 主色调
+        primaryColor: defaultSettings.primaryColor,
+        fixedHeader: defaultSettings.fixedHeader,
+        fixSiderbar: defaultSettings.fixSiderbar,
+        colorWeak: defaultSettings.colorWeak,
+
+        hideHintAlert: false,
+        hideCopyButton: false
+      },
       // 媒体查询
       query: {},
+
+      // 是否手机模式
+      isMobile: false
     }
   },
   computed: {
     ...mapState({
       // 动态主路由
-      mainMenu: state => state.permission.addRouters,
-    }),
+      mainMenu: state => state.permission.addRouters
+    })
   },
   created () {
-    // bind router (绑定路由)
     const routes = this.mainMenu.find(item => item.path === '/')
     this.menus = (routes && routes.children) || []
-
     // 处理侧栏收起状态
     this.$watch('collapsed', () => {
       this.$store.commit(SIDEBAR_TYPE, this.collapsed)
@@ -111,73 +121,47 @@ export default {
     }
 
     // first update color
-    // THEME COLOR HANDLER!! PLEASE CHECK THAT!!
+    // TIPS: THEME COLOR HANDLER!! PLEASE CHECK THAT!!
     if (process.env.NODE_ENV !== 'production' || process.env.VUE_APP_PREVIEW === 'true') {
-      updateTheme(this.primaryColor)
-    }
-    //  first update color weak
-    if (this.colorWeak) {
-      updateColorWeak(this.colorWeak)
+      updateTheme(this.settings.primaryColor)
     }
   },
   methods: {
     i18nRender,
-    handleCollapse (val) {
-      this.collapsed = val
-    },
     handleMediaQuery (val) {
       this.query = val
       if (this.isMobile && !val['screen-xs']) {
-        this.$store.commit(TOGGLE_MOBILE_TYPE, false)
+        this.isMobile = false
         return
       }
       if (!this.isMobile && val['screen-xs']) {
-        this.$store.commit(TOGGLE_MOBILE_TYPE, true)
+        this.isMobile = true
         this.collapsed = false
-        this.$store.commit(TOGGLE_CONTENT_WIDTH, CONTENT_WIDTH_TYPE.Fluid)
+        this.settings.contentWidth = CONTENT_WIDTH_TYPE.Fluid
+        // this.settings.fixSiderbar = false
       }
     },
-    /**
-     * 同步和保存设置栏配置
-     * */
+    handleCollapse (val) {
+      this.collapsed = val
+    },
     handleSettingChange ({ type, value }) {
       console.log('type', type, value)
+      type && (this.settings[type] = value)
       switch (type) {
         case 'contentWidth':
-          this.$store.commit(TOGGLE_CONTENT_WIDTH, value)
-          break
-        case 'primaryColor':
-          this.$store.commit(TOGGLE_COLOR, value)
+          this.settings[type] = value
           break
         case 'layout':
-          this.$store.commit(TOGGLE_LAYOUT, value)
           if (value === 'sidemenu') {
-            this.$store.commit(TOGGLE_CONTENT_WIDTH, CONTENT_WIDTH_TYPE.Fluid)
+            this.settings.contentWidth = CONTENT_WIDTH_TYPE.Fluid
           } else {
-            this.$store.commit(TOGGLE_CONTENT_WIDTH, CONTENT_WIDTH_TYPE.Fixed)
-            this.$store.commit(TOGGLE_FIXED_SIDEBAR, false)
+            this.settings.fixSiderbar = false
+            this.settings.contentWidth = CONTENT_WIDTH_TYPE.Fixed
           }
           break
-        case 'theme':
-          this.$store.commit(TOGGLE_NAV_THEME, value)
-          break
-        case 'fixedHeader':
-          this.$store.commit(TOGGLE_FIXED_HEADER, value)
-          break
-        case 'fixSiderbar':
-          this.$store.commit(TOGGLE_FIXED_SIDEBAR, value)
-          break
-        case 'colorWeak':
-          this.$store.commit(TOGGLE_WEAK, value)
-          break
       }
-    },
-  },
-  components: {
-    RightContent,
-    GlobalFooter,
-    SettingDrawer,
-  },
+    }
+  }
 }
 </script>
 

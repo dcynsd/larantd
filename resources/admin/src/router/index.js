@@ -1,26 +1,18 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
 import { constantRouterMap } from '@/config/router.config'
 
-// hack router push/replace callback
-['push', 'replace'].map(key => {
-  return {
-    k: key,
-    prop: VueRouter.prototype[key],
-  }
-}).forEach(item => {
-  VueRouter.prototype[item.k] = function newCall (location, onResolve, onReject) {
-    if (onResolve || onReject) return item.prop.call(this, location, onResolve, onReject)
-    return item.prop.call(this, location).catch(err => err)
-  }
-})
+// hack router push callback
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location, onResolve, onReject) {
+  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+  return originalPush.call(this, location).catch(err => err)
+}
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
-const router = new VueRouter({
+export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: constantRouterMap,
+  routes: constantRouterMap
 })
-
-export default router

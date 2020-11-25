@@ -17,7 +17,7 @@ export default new Vuex.Store({
   modules: {
     app,
     auth,
-    permission,
+    permission
   },
   state: {
 
@@ -28,5 +28,5 @@ export default new Vuex.Store({
   actions: {
 
   },
-  getters,
+  getters
 })

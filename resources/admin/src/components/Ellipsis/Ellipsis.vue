@@ -3,36 +3,38 @@ import Tooltip from 'ant-design-vue/es/tooltip'
 import { cutStrByFullLength, getStrFullLength } from '@/components/_util/util'
 /*
     const isSupportLineClamp = document.body.style.webkitLineClamp !== undefined;
+
     const TooltipOverlayStyle = {
       overflowWrap: 'break-word',
       wordWrap: 'break-word',
     };
   */
+
 export default {
   name: 'Ellipsis',
   components: {
-    Tooltip,
+    Tooltip
   },
   props: {
     prefixCls: {
       type: String,
-      default: 'ant-pro-ellipsis',
+      default: 'ant-pro-ellipsis'
     },
     tooltip: {
-      type: Boolean,
+      type: Boolean
     },
     length: {
       type: Number,
-      required: true,
+      required: true
     },
     lines: {
       type: Number,
-      default: 1,
+      default: 1
     },
     fullWidthRecognition: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   methods: {
     getStrDom (str, fullLength) {
@@ -47,7 +49,7 @@ export default {
           { this.getStrDom(fullStr, fullLength) }
         </Tooltip>
       )
-    },
+    }
   },
   render () {
     const { tooltip, length } = this.$props
@@ -57,6 +59,6 @@ export default {
     return (
       strDom
     )
-  },
+  }
 }
 </script>

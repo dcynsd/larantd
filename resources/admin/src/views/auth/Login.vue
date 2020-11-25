@@ -51,7 +51,6 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { getSmsCaptcha } from '@/api/auth/login'
 
 export default {
   name: 'Login',
@@ -59,8 +58,8 @@ export default {
     return {
       form: this.$form.createForm(this),
       state: {
-        loginBtn: false,
-      },
+        loginBtn: false
+      }
     }
   },
   methods: {
@@ -70,8 +69,7 @@ export default {
       const {
         form: { validateFields },
         state,
-        customActiveKey,
-        Login,
+        Login
       } = this
 
       state.loginBtn = true
@@ -92,11 +90,11 @@ export default {
       })
     },
     loginSuccess (res) {
-      this.$router.push({ name: 'Welcome' })
+      this.$router.push({ path: '/' })
       setTimeout(() => {
         this.$notification.success({
           message: '欢迎',
-          description: '欢迎回来',
+          description: '欢迎回来'
         })
       }, 1000)
     },
@@ -104,10 +102,10 @@ export default {
       this.$notification.error({
         message: '错误',
         description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
-        duration: 4,
+        duration: 4
       })
-    },
-  },
+    }
+  }
 }
 </script>
 

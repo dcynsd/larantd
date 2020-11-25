@@ -28,11 +28,11 @@ class AdminUser extends Model implements AuthenticatableContract, AuthorizableCo
 
     public function permissions()
     {
-        return $this->morphToMany(AdminPermission::class, 'admin_model_has_permission');
+        return $this->morphToMany(AdminPermission::class, 'taggable', 'admin_model_has_permission');
     }
 
     public function roles()
     {
-        return $this->morphToMany(AdminRole::class, 'admin_model_has_role');
+        return $this->morphToMany(AdminRole::class, 'taggable', 'admin_model_has_role');
     }
 }

@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { getMenus } from '@/api/auth/login'
+import { getMenu } from '@/api/auth'
 // eslint-disable-next-line
 import { BasicLayout, BlankLayout, PageView, RouteView } from '@/layouts'
 
@@ -15,14 +15,19 @@ const constantRouterComponents = {
   '500': () => import(/* webpackChunkName: "error" */ '@/views/exception/500'),
 
   // 你需要动态引入的页面组件
-  'Welcome': () => import('@/views/dashboard/Welcome'),
+  'Workplace': () => import('@/views/dashboard/Workplace'),
+  'Analysis': () => import('@/views/dashboard/Analysis'),
 
-  'PermissionList': () => import('@/views/setting/permissions/List'),
+  'AdminUserList': () => import('@/views/dashboard/Workplace'),
+  'AdminPermissionList': () => import('@/views/setting/permissions/List'),
+  'AdminRoleList': () => import('@/views/dashboard/Workplace'),
+  'AdminMenuList': () => import('@/views/dashboard/Workplace')
+
 }
 
 // 前端未找到页面路由（固定不用改）
 const notFoundRouter = {
-  path: '*', redirect: '/404', hidden: true,
+  path: '*', redirect: '/404', hidden: true
 }
 
 // 根级菜单
@@ -33,23 +38,21 @@ const rootRouter = {
   component: 'BasicLayout',
   redirect: '/dashboard',
   meta: {
-    title: '首页',
+    title: '首页'
   },
-  children: [],
+  children: []
 }
 
 /**
  * 动态生成菜单
- * @param token
  * @returns {Promise<Router>}
  */
 export const generatorDynamicRouter = () => {
   return new Promise((resolve, reject) => {
-    getMenus().then(res => {
+    getMenu().then(res => {
       const { data } = res
       const menuNav = []
       const childrenNav = []
-      // 后端数据, 根级树数组, 根级 PID
       listToTree(data, childrenNav, 0)
       rootRouter.children = childrenNav
       menuNav.push(rootRouter)
@@ -71,7 +74,7 @@ export const generatorDynamicRouter = () => {
  */
 export const generator = (routerMap, parent) => {
   return routerMap.map(item => {
-    const { title, show, hideChildren, hiddenHeaderContent, target, icon, keepAlive } = item.meta || {}
+    const { title, show, hideChildren, hiddenHeaderContent, target, icon } = item.meta || {}
     const currentRouter = {
       // 如果路由设置了 path，则作为默认 path，否则 路由地址 动态拼接生成如 /dashboard/workplace
       path: item.path || `${parent && parent.path || ''}/${item.key}`,
@@ -88,11 +91,8 @@ export const generator = (routerMap, parent) => {
         icon: icon || undefined,
         hiddenHeaderContent: hiddenHeaderContent,
         target: target,
-        permission: item.name,
-      },
-    }
-    if (keepAlive === true) {
-      currentRouter.meta.keepAlive = keepAlive
+        permission: item.name
+      }
     }
     // 是否设置了隐藏菜单
     if (show === false) {
@@ -130,7 +130,7 @@ const listToTree = (list, tree, parentId) => {
       const child = {
         ...item,
         key: item.key || item.name,
-        children: [],
+        children: []
       }
       // 迭代 list， 找到当前菜单相符合的所有子菜单
       listToTree(list, child.children, item.id)

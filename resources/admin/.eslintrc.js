@@ -1,58 +1,75 @@
 module.exports = {
   root: true,
   env: {
-    node: true,
+    node: true
   },
-  extends: [
+  'extends': [
     'plugin:vue/strongly-recommended',
-    '@vue/standard',
+    '@vue/standard'
   ],
-  parserOptions: {
-    parser: 'babel-eslint',
-  },
   rules: {
-    // enUS: all rules docs https://eslint.org/docs/rules/
-    // zhCN: 所有规则文档 https://eslint.bootcss.com/docs/rules/
-    // 基础规则 全部 ES 项目通用
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'quote-props': 'off',
-    // 结尾必须有逗号(主要缓解增加一行对象属性，导致 git 变更记录是两行的情况)
-    'comma-dangle': ['error', 'always-multiline'],
-    // 逗号必须在一行的结尾
-    'comma-style': ['error', 'last'],
-    // 禁止混合使用不同的操作符 'error','off'
-    'no-mixed-operators': 'off',
-    // 禁止未使用过的变量 default: ['error', { vars: 'local' }]
-    'no-unused-vars': ['off'],
-
-    /* vue 项目专用 */
-    'vue/require-default-prop': 'warn',
-    'vue/singleline-html-element-content-newline': ['off'],
+    'no-console': 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'generator-star-spacing': 'off',
+    'no-mixed-operators': 0,
     'vue/max-attributes-per-line': [
       2,
       {
         'singleline': 5,
         'multiline': {
           'max': 1,
-          'allowFirstLine': false,
-        },
-      },
+          'allowFirstLine': false
+        }
+      }
     ],
-
-    // bug fix
+    'vue/attribute-hyphenation': 0,
+    'vue/html-self-closing': 0,
+    'vue/component-name-in-template-casing': 0,
+    'vue/html-closing-bracket-spacing': 0,
+    'vue/singleline-html-element-content-newline': 0,
+    'vue/no-unused-components': 0,
+    'vue/multiline-html-element-content-newline': 0,
+    'vue/no-use-v-if-with-v-for': 0,
+    'vue/html-closing-bracket-newline': 0,
+    'vue/no-parsing-error': 0,
+    'no-tabs': 0,
+    'quotes': [
+      2,
+      'single',
+      {
+        'avoidEscape': true,
+        'allowTemplateLiterals': true
+      }
+    ],
+    'semi': [
+      2,
+      'never',
+      {
+        'beforeStatementContinuationChars': 'never'
+      }
+    ],
+    'no-delete-var': 2,
+    'prefer-const': [
+      2,
+      {
+        'ignoreReadBeforeAssign': false
+      }
+    ],
     'template-curly-spacing': 'off',
-    indent: 'off',
+    'indent': 'off'
+  },
+  parserOptions: {
+    parser: 'babel-eslint'
   },
   overrides: [
     {
       files: [
         '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)'
       ],
       env: {
-        jest: true,
-      },
-    },
-  ],
+        jest: true
+      }
+    }
+  ]
 }

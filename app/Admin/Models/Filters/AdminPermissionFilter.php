@@ -18,4 +18,9 @@ class AdminPermissionFilter extends ModelFilter
     {
         return $this->whereLike('name', $value);
     }
+
+    public function slug($value)
+    {
+        return $this->whereLike('slug', $value);
+    }
 }

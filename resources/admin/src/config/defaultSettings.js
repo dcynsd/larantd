@@ -7,21 +7,24 @@
  * fixedHeader - 固定 Header : boolean
  * fixSiderbar - 固定左侧菜单栏 ： boolean
  * contentWidth - 内容区布局： 流式 |  固定
+ *
+ * storageOptions: {} - Vue-ls 插件配置项 (localStorage/sessionStorage)
+ *
  */
 
 export default {
   navTheme: 'dark', // theme for nav menu
-  primaryColor: '#52C41A', // primary color of ant design
+  primaryColor: '#1890ff', // primary color of ant design
   layout: 'sidemenu', // nav menu position: `sidemenu` or `topmenu`
   contentWidth: 'Fluid', // layout of content: `Fluid` or `Fixed`, only works when layout is topmenu
   fixedHeader: false, // sticky header
   fixSiderbar: false, // sticky siderbar
   colorWeak: false,
   menu: {
-    locale: true,
+    locale: true
   },
-  title: 'Laravel Ant Design',
+  title: 'Larave Ant Design',
   pwa: false,
   iconfontUrl: '',
-  production: process.env.NODE_ENV === 'production' && process.env.VUE_APP_PREVIEW !== 'true',
+  production: process.env.NODE_ENV === 'production' && process.env.VUE_APP_PREVIEW !== 'true'
 }
