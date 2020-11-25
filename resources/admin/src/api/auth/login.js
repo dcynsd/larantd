@@ -15,6 +15,13 @@ export function getMe () {
   })
 }
 
+export function getMenus () {
+  return request({
+    url: '/authorizations/menus',
+    method: 'get',
+  })
+}
+
 export function logout () {
   return request({
     url: '/authorizations',

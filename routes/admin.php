@@ -24,9 +24,18 @@ Route::prefix('admin-api')
             // 登录用户信息
             Route::get('authorizations/me', [AuthorizationController::class, 'me'])
                 ->name('authorizations.me');
+            // 菜单
+            Route::get('authorizations/menus', [AuthorizationController::class, 'menus'])
+                ->name('authorizations.menus');
             // 退出登录
             Route::delete('authorizations', [AuthorizationController::class, 'destroy'])
                 ->name('authorizations.destroy');
+
+            Route::resources([
+                'admin-permissions' => 'AdminPermissionController',
+                'admin-roles' => 'AdminRoleController',
+                'admin-menus' => 'AdminMenuController',
+            ]);
 
         });
 

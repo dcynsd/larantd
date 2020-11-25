@@ -12,9 +12,7 @@ class AdminUser extends Model implements AuthenticatableContract, AuthorizableCo
 {
     use Authenticatable, Authorizable;
 
-    protected $fillable =[
-        'name', 'avatar', 'username', 'password',
-    ];
+    protected $fillable = ['name', 'avatar', 'username', 'password'];
 
     protected $hidden = ['password'];
 
@@ -26,5 +24,15 @@ class AdminUser extends Model implements AuthenticatableContract, AuthorizableCo
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function permissions()
+    {
+        return $this->morphToMany(AdminPermission::class, 'admin_model_has_permission');
+    }
+
+    public function roles()
+    {
+        return $this->morphToMany(AdminRole::class, 'admin_model_has_role');
     }
 }

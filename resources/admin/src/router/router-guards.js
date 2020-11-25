@@ -20,13 +20,10 @@ router.beforeEach((to, from, next) => {
       next({ path: defaultRoutePath })
       NProgress.done()
     } else {
-      // check login user.roles is null
       if (!store.getters.token) {
         store.dispatch('GetMe').then(res => {
-          const roles = res && res.role
           // generate dynamic router
-          store.dispatch('GenerateRoutes', { roles }).then(() => {
-            // 根据roles权限生成可访问的路由表
+          store.dispatch('GenerateRoutes').then(() => {
             // 动态添加可访问路由表
             router.addRoutes(store.getters.addRouters)
             // 请求带有 redirect 重定向时，登录自动重定向到该地址
