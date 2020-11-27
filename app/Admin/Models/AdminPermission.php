@@ -11,6 +11,8 @@ class AdminPermission extends Model
         'http_path' => 'json'
     ];
 
+    protected $hidden = ['pivot'];
+
     public static $httpMethods = [
         'GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD',
     ];

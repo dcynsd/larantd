@@ -47,7 +47,7 @@ class InitAdministrator extends Command
             'name' => 'Administrator',
             'avatar' => 'https://cdn.learnku.com/uploads/avatars/18572_1531721480.jpg!/both/100x100',
             'username' => 'admin',
-            'password' => bcrypt('admin'),
+            'password' => 'admin',
         ]);
 
         $user->roles()->attach($role);

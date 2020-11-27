@@ -28,6 +28,5 @@ class AdminPermissionRequest extends FormRequest
                     'http_path' => 'nullable|string',
                 ];
         }
-
     }
 }

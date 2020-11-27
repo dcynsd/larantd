@@ -26,6 +26,13 @@ class AdminUser extends Model implements AuthenticatableContract, AuthorizableCo
         return [];
     }
 
+    public function setPasswordAttribute($password)
+    {
+        if ($password) {
+            $this->attributes['password'] = bcrypt($password);
+        }
+    }
+
     public function permissions()
     {
         return $this->morphToMany(AdminPermission::class, 'taggable', 'admin_model_has_permission');

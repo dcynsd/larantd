@@ -15,7 +15,7 @@ class AuthorizationController extends Controller
             $this->response()->errorBadRequest('用户名或密码错误');
         }
 
-        return response()->json([
+        return $this->response()->success([
             'token' => $token,
         ]);
     }
@@ -34,6 +34,6 @@ class AuthorizationController extends Controller
     {
         Auth::logout();
 
-        return response()->noContent();
+        return $this->response()->noContent();
     }
 }

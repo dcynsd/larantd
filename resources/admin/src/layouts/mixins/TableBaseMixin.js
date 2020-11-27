@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 export default function (config) {
   const { getList, add, update } = config
 
@@ -70,7 +72,22 @@ export default function (config) {
                 form.resetFields()
                 this.$refs.table.refresh()
                 this.$message.success('修改成功')
-              }).catch(() => {
+              }).catch(err => {
+                const { code, error } = err.response.data
+
+                if (code === 422) {
+                  _.forEach(error, (item, index) => {
+                    form.setFields({
+                      [index]: {
+                        value: values[index],
+                        errors: [
+                          { message: item[0], field: index }
+                        ]
+                      }
+                    })
+                  })
+                }
+
                 this.confirmLoading = false
               })
             } else {
@@ -81,7 +98,22 @@ export default function (config) {
                 form.resetFields()
                 this.$refs.table.refresh()
                 this.$message.success('新增成功')
-              }).catch(() => {
+              }).catch(err => {
+                const { code, error } = err.response.data
+
+                if (code === 422) {
+                  _.forEach(error, (item, index) => {
+                    form.setFields({
+                      [index]: {
+                        value: values[index],
+                        errors: [
+                          { message: item[0], field: index }
+                        ]
+                      }
+                    })
+                  })
+                }
+
                 this.confirmLoading = false
               })
             }

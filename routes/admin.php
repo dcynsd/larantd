@@ -30,11 +30,15 @@ Route::prefix('admin-api')
             // 退出登录
             Route::delete('authorizations', [AuthorizationController::class, 'destroy'])
                 ->name('authorizations.destroy');
+            // 文件系统
+            Route::resource('file-systems', 'FileSystemController')
+                ->only(['index', 'store']);
 
             Route::resources([
                 'admin-permissions' => 'AdminPermissionController',
                 'admin-roles' => 'AdminRoleController',
                 'admin-menus' => 'AdminMenuController',
+                'admin-users' => 'AdminUserController',
             ]);
 
         });

@@ -18,9 +18,9 @@ const constantRouterComponents = {
   'Workplace': () => import('@/views/dashboard/Workplace'),
   'Analysis': () => import('@/views/dashboard/Analysis'),
 
-  'AdminUserList': () => import('@/views/dashboard/Workplace'),
+  'AdminUserList': () => import('@/views/setting/users/List'),
   'AdminPermissionList': () => import('@/views/setting/permissions/List'),
-  'AdminRoleList': () => import('@/views/dashboard/Workplace'),
+  'AdminRoleList': () => import('@/views/setting/roles/List'),
   'AdminMenuList': () => import('@/views/dashboard/Workplace')
 
 }
