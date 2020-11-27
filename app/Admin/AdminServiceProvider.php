@@ -26,8 +26,7 @@ class AdminServiceProvider extends ServiceProvider
         \App\Admin\Console\Commands\AdminModelGenerator::class,
         \App\Admin\Console\Commands\AdminRequestGenerator::class,
         \App\Admin\Console\Commands\AdminResourceGenerator::class,
-        \App\Admin\Console\Commands\InitAdministrator::class,
-        \App\Admin\Console\Commands\InitAdminMenu::class,
+        \App\Admin\Console\Commands\InitAdmin::class,
     ];
 
     public function boot()

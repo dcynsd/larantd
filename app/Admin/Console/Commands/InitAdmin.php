@@ -3,18 +3,78 @@
 namespace App\Admin\Console\Commands;
 
 use App\Admin\Models\AdminMenu;
+use App\Admin\Models\AdminRole;
+use App\Admin\Models\AdminUser;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
+use App\Admin\Models\AdminPermission;
 
-class InitAdminMenu extends Command
+class InitAdmin extends Command
 {
-    protected $signature = 'admin:init-admin-menu';
+    protected $signature = 'admin:init-admin';
 
-    protected $description = '初始化后台菜单';
+    protected $description = '初始化后台';
 
     public function handle()
     {
-        AdminMenu::truncate();
+        $this->truncateTable();
 
+        $permission = $this->initPermission();
+
+        $role = $this->initRole($permission);
+
+        $this->initAdminUser($role);
+
+        $this->initAdminMenu();
+
+        $this->info('初始化后台成功');
+    }
+
+    protected function truncateTable()
+    {
+        DB::table('admin_model_has_permission')->truncate();
+        DB::table('admin_model_has_role')->truncate();
+        AdminRole::truncate();
+        AdminPermission::truncate();
+        AdminUser::truncate();
+        AdminMenu::truncate();
+    }
+
+    protected function initPermission()
+    {
+        return AdminPermission::create([
+            'name' => '全部权限',
+            'slug' => '*',
+            'http_path' => '*',
+        ]);
+    }
+
+    protected function initRole($permission)
+    {
+        $role = AdminRole::create([
+            'name' => '超级管理员',
+            'slug' => 'administrator',
+        ]);
+
+        $role->permissions()->attach($permission);
+
+        return $role;
+    }
+
+    protected function initAdminUser($role)
+    {
+        $user = AdminUser::create([
+            'name' => 'Administrator',
+            'avatar' => 'https://i.imgur.com/GvJOufK.png',
+            'username' => 'admin',
+            'password' => 'admin',
+        ]);
+
+        $user->roles()->attach($role);
+    }
+
+    protected function initAdminMenu()
+    {
         $data = [
             [
                 'parent_id' => 0,
@@ -123,7 +183,5 @@ class InitAdminMenu extends Command
         ];
 
         AdminMenu::insert($data);
-
-        $this->info('初始化后台菜单成功');
     }
 }
