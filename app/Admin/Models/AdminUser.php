@@ -4,13 +4,13 @@ namespace App\Admin\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-use Illuminate\Foundation\Auth\Access\Authorizable;
+use App\Admin\Utils\Traits\HasPermission;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
 class AdminUser extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject
 {
-    use Authenticatable, Authorizable;
+    use Authenticatable, HasPermission;
 
     protected $fillable = ['name', 'avatar', 'username', 'password'];
 

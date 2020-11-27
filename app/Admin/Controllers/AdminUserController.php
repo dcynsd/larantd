@@ -49,8 +49,6 @@ class AdminUserController extends Controller
 
     public function destroy(AdminUser $adminUser)
     {
-        $adminUser->permissions()->detach();
-        $adminUser->roles()->detach();
         $adminUser->delete();
 
         return $this->response->noContent();

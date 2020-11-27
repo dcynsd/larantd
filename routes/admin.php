@@ -18,6 +18,7 @@ Route::prefix('admin-api')
 
         Route::middleware([
             'auth:admin',
+            'admin.permission',
             'token.refresh',
         ])->group(function () {
 

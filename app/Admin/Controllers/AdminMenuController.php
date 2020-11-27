@@ -54,8 +54,6 @@ class AdminMenuController extends Controller
 
     public function destroy(AdminMenu $adminMenu)
     {
-        $adminMenu->roles()->detach();
-        $adminMenu->permissions()->detach();
         $adminMenu->delete();
 
         return $this->response->noContent();

@@ -2,8 +2,13 @@
 
 namespace App\Admin\Models;
 
+use App\Admin\Utils\Admin;
+use App\Admin\Utils\Traits\HasPermission;
+
 class AdminMenu extends Model
 {
+    use HasPermission;
+
     protected $fillable = [
         'parent_id', 'title', 'name', 'component', 'path', 'redirect',
         'icon', 'is_cache', 'is_show', 'order'

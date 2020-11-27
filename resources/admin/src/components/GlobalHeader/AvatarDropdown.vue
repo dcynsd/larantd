@@ -1,8 +1,8 @@
 <template>
-  <a-dropdown v-if="currentUser && currentUser.name" placement="bottomRight">
+  <a-dropdown placement="bottomRight">
     <span class="ant-pro-account-avatar">
-      <a-avatar size="small" src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png" class="antd-pro-global-header-index-avatar" />
-      <span>{{ currentUser.name }}</span>
+      <a-avatar size="small" :src="avatar" class="antd-pro-global-header-index-avatar" />
+      <span>{{ nickname }}</span>
     </span>
     <template v-slot:overlay>
       <a-menu class="ant-pro-drop-down menu" :selected-keys="[]">
@@ -22,13 +22,11 @@
       </a-menu>
     </template>
   </a-dropdown>
-  <span v-else>
-    <a-spin size="small" :style="{ marginLeft: 8, marginRight: 8 }" />
-  </span>
 </template>
 
 <script>
 import { Modal } from 'ant-design-vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'AvatarDropdown',
@@ -41,6 +39,12 @@ export default {
       type: Boolean,
       default: true
     }
+  },
+  computed: {
+    ...mapState({
+      nickname: (state) => state.auth.name,
+      avatar: (state) => state.auth.avatar
+    })
   },
   methods: {
     handleToCenter () {

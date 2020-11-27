@@ -9,7 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class AdminServiceProvider extends ServiceProvider
 {
     protected $middlewareMap = [
-
+        'admin.permission' => \App\Admin\Middleware\AdminPermission::class,
     ];
 
     protected $middlewareGroups = [
