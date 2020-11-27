@@ -4,7 +4,7 @@ import { getMenu } from '@/api/auth'
 import { BasicLayout, BlankLayout, PageView, RouteView } from '@/layouts'
 
 // 前端路由表
-const constantRouterComponents = {
+export const constantRouterComponents = {
   // 基础页面 layout 必须引入
   BasicLayout: BasicLayout,
   BlankLayout: BlankLayout,
@@ -21,7 +21,7 @@ const constantRouterComponents = {
   'AdminUserList': () => import('@/views/setting/users/List'),
   'AdminPermissionList': () => import('@/views/setting/permissions/List'),
   'AdminRoleList': () => import('@/views/setting/roles/List'),
-  'AdminMenuList': () => import('@/views/dashboard/Workplace')
+  'AdminMenuList': () => import('@/views/setting/menus/List')
 
 }
 

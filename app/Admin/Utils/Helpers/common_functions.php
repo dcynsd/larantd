@@ -48,3 +48,29 @@ if (! function_exists('makeFullUrl')) {
         return config('app.url') . '/storage/' . $url;
     }
 }
+
+if (! function_exists('show_tree')) {
+    /**
+     * 以树状展示数据
+     * @param array $data
+     * @return array
+     */
+    function show_tree(array $data)
+    {
+        $tree = [];
+        foreach ($data as $value) {
+            if ($value['level'] > 0) {
+                $prefix = '|' . str_repeat('--', $value['level']);
+            } else {
+                $prefix = '';
+            }
+
+            $tree[] = [
+                'value' => $value['id'],
+                'label' => $prefix . $value['title'],
+            ];
+        }
+
+        return $tree;
+    }
+}

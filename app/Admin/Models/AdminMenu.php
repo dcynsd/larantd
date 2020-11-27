@@ -23,4 +23,41 @@ class AdminMenu extends Model
     {
         return $this->morphToMany(AdminRole::class, 'taggable', 'admin_model_has_role');
     }
+
+    public function parent()
+    {
+        return $this->belongsTo(AdminMenu::class);
+    }
+
+    public function children()
+    {
+        return $this->hasMany(AdminMenu::class, 'parent_id');
+    }
+
+    public function setRedirectAttribute($value)
+    {
+        if (! $value) {
+            $this->attributes['redirect'] = '';
+        } else {
+            $this->attributes['redirect'] = $value;
+        }
+    }
+
+    public function setIconAttribute($value)
+    {
+        if (! $value) {
+            $this->attributes['icon'] = '';
+        } else {
+            $this->attributes['icon'] = $value;
+        }
+    }
+
+    public function setPathAttribute($value)
+    {
+        if (!$value) {
+            $this->attributes['path'] = '';
+        } else {
+            $this->attributes['path'] = $value;
+        }
+    }
 }

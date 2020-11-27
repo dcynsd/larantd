@@ -15,27 +15,27 @@ class AdminPermissionController extends Controller
             ->filter($request->all())
             ->paginate();
 
-        return $this->response()->success(AdminPermissionResource::collection($data));
+        return $this->response->success(AdminPermissionResource::collection($data));
     }
 
     public function store(AdminPermissionRequest $request)
     {
         AdminPermission::create($request->validated());
 
-        return $this->response()->created();
+        return $this->response->created();
     }
 
     public function update(AdminPermission $adminPermission, AdminPermissionRequest $request)
     {
         $adminPermission->update($request->validated());
 
-        return $this->response()->created();
+        return $this->response->created();
     }
 
     public function destroy(AdminPermission $adminPermission)
     {
         $adminPermission->delete();
 
-        return $this->response()->noContent();
+        return $this->response->noContent();
     }
 }

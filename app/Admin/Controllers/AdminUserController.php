@@ -18,12 +18,12 @@ class AdminUserController extends Controller
             ->with('permissions:id,name', 'roles:id,name')
             ->paginate();
 
-        return $this->response()->success(AdminUserResource::collection($data));
+        return $this->response->success(AdminUserResource::collection($data));
     }
 
     public function create()
     {
-        return $this->response()->success([
+        return $this->response->success([
             'roles' => AdminRole::select('id', 'name')->get(),
             'permissions' => AdminPermission::select('id', 'name')->get(),
         ]);
@@ -35,7 +35,7 @@ class AdminUserController extends Controller
 
         $adminUser->syncRoleAndPermission();
 
-        return $this->response()->created();
+        return $this->response->created();
     }
 
     public function update(AdminUser $adminUser, AdminUserRequest $request)
@@ -44,7 +44,7 @@ class AdminUserController extends Controller
 
         $adminUser->syncRoleAndPermission();
 
-        return $this->response()->created();
+        return $this->response->created();
     }
 
     public function destroy(AdminUser $adminUser)
@@ -53,6 +53,6 @@ class AdminUserController extends Controller
         $adminUser->roles()->detach();
         $adminUser->delete();
 
-        return $this->response()->noContent();
+        return $this->response->noContent();
     }
 }

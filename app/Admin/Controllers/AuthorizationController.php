@@ -12,17 +12,17 @@ class AuthorizationController extends Controller
     public function store(AuthorizationRequest $request)
     {
         if (! $token = Auth::attempt($request->only(['username', 'password']))) {
-            $this->response()->errorBadRequest('用户名或密码错误');
+            $this->response->errorBadRequest('用户名或密码错误');
         }
 
-        return $this->response()->success([
+        return $this->response->success([
             'token' => $token,
         ]);
     }
 
     public function me()
     {
-        return $this->response()->success(new MeResource(Auth::user()));
+        return $this->response->success(new MeResource(Auth::user()));
     }
 
     public function menus(AuthorizationService $authorizationService)
@@ -34,6 +34,6 @@ class AuthorizationController extends Controller
     {
         Auth::logout();
 
-        return $this->response()->noContent();
+        return $this->response->noContent();
     }
 }

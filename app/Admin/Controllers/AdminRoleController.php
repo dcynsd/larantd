@@ -17,14 +17,14 @@ class AdminRoleController extends Controller
             ->with('permissions:id,name')
             ->paginate();
 
-        return $this->response()->success(AdminRoleResource::collection($data));
+        return $this->response->success(AdminRoleResource::collection($data));
     }
 
     public function create()
     {
         $data = AdminPermission::select('id', 'name')->get();
 
-        return $this->response()->success($data);
+        return $this->response->success($data);
     }
 
     public function store(AdminRoleRequest $request)
@@ -33,7 +33,7 @@ class AdminRoleController extends Controller
 
         $adminRole->syncRoleAndPermission();
 
-        return $this->response()->created();
+        return $this->response->created();
     }
 
     public function update(AdminRole $adminRole, AdminRoleRequest $request)
@@ -42,7 +42,7 @@ class AdminRoleController extends Controller
 
         $adminRole->syncRoleAndPermission();
 
-        return $this->response()->created();
+        return $this->response->created();
     }
 
     public function destroy(AdminRole $adminRole)
@@ -50,6 +50,6 @@ class AdminRoleController extends Controller
         $adminRole->permissions()->detach();
         $adminRole->delete();
 
-        return $this->response()->noContent();
+        return $this->response->noContent();
     }
 }
