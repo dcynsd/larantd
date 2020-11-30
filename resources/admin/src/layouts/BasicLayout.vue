@@ -26,7 +26,7 @@
       </div>
     </template>
 
-    <!-- <setting-drawer :settings="settings" @change="handleSettingChange" /> -->
+    <setting-drawer :settings="settings" @change="handleSettingChange" />
     <template v-slot:rightContentRender>
       <right-content :top-menu="settings.layout === 'topmenu'" :is-mobile="isMobile" :theme="settings.theme" />
     </template>
@@ -41,13 +41,25 @@
 import { SettingDrawer, updateTheme } from '@ant-design-vue/pro-layout'
 import { i18nRender } from '@/locales'
 import { mapState } from 'vuex'
-import { CONTENT_WIDTH_TYPE, SIDEBAR_TYPE, TOGGLE_MOBILE_TYPE } from '@/store/mutation-types'
+import {
+  SIDEBAR_TYPE,
+  TOGGLE_MOBILE_TYPE,
+  TOGGLE_NAV_THEME,
+  TOGGLE_LAYOUT,
+  TOGGLE_FIXED_HEADER,
+  TOGGLE_FIXED_SIDEBAR,
+  TOGGLE_CONTENT_WIDTH,
+  TOGGLE_COLOR,
+  CONTENT_WIDTH_TYPE
+} from '@/store/mutation-types'
 
 import defaultSettings from '@/config/defaultSettings'
 import RightContent from '@/components/GlobalHeader/RightContent'
 import GlobalFooter from '@/components/GlobalFooter'
 import Ads from '@/components/Other/CarbonAds'
 import LogoSvg from '../assets/logo.svg?inline'
+
+import storage from 'store'
 
 export default {
   name: 'BasicLayout',
@@ -71,19 +83,19 @@ export default {
       title: defaultSettings.title,
       settings: {
         // 布局类型
-        layout: defaultSettings.layout, // 'sidemenu', 'topmenu'
+        layout: storage.get(TOGGLE_LAYOUT), // 'sidemenu', 'topmenu'
         // CONTENT_WIDTH_TYPE
-        contentWidth: defaultSettings.layout === 'sidemenu' ? CONTENT_WIDTH_TYPE.Fluid : defaultSettings.contentWidth,
+        contentWidth: storage.get(TOGGLE_CONTENT_WIDTH),
         // 主题 'dark' | 'light'
-        theme: defaultSettings.navTheme,
+        theme: storage.get(TOGGLE_NAV_THEME), // defaultSettings.navTheme,
         // 主色调
-        primaryColor: defaultSettings.primaryColor,
-        fixedHeader: defaultSettings.fixedHeader,
-        fixSiderbar: defaultSettings.fixSiderbar,
+        primaryColor: storage.get(TOGGLE_COLOR),
+        fixedHeader: storage.get(TOGGLE_FIXED_HEADER),
+        fixSiderbar: storage.get(TOGGLE_FIXED_SIDEBAR),
         colorWeak: defaultSettings.colorWeak,
 
-        hideHintAlert: false,
-        hideCopyButton: false
+        hideHintAlert: true,
+        hideCopyButton: true
       },
       // 媒体查询
       query: {},
@@ -122,9 +134,10 @@ export default {
 
     // first update color
     // TIPS: THEME COLOR HANDLER!! PLEASE CHECK THAT!!
-    if (process.env.NODE_ENV !== 'production' || process.env.VUE_APP_PREVIEW === 'true') {
-      updateTheme(this.settings.primaryColor)
-    }
+    // if (process.env.NODE_ENV !== 'production' || process.env.VUE_APP_PREVIEW === 'true') {
+    //   updateTheme(this.settings.primaryColor)
+    // }
+    updateTheme(this.settings.primaryColor)
   },
   methods: {
     i18nRender,
@@ -150,13 +163,27 @@ export default {
       switch (type) {
         case 'contentWidth':
           this.settings[type] = value
+          storage.set(TOGGLE_CONTENT_WIDTH, value)
+          break
+        case 'theme':
+          storage.set(TOGGLE_NAV_THEME, value)
+          break
+        case 'primaryColor':
+          storage.set(TOGGLE_COLOR, value)
+          break
+        case 'fixedHeader':
+          storage.set(TOGGLE_FIXED_HEADER, value)
           break
         case 'layout':
+          storage.set(TOGGLE_LAYOUT, value)
           if (value === 'sidemenu') {
             this.settings.contentWidth = CONTENT_WIDTH_TYPE.Fluid
+            storage.set(TOGGLE_CONTENT_WIDTH, CONTENT_WIDTH_TYPE.Fluid)
           } else {
             this.settings.fixSiderbar = false
             this.settings.contentWidth = CONTENT_WIDTH_TYPE.Fixed
+            storage.set(TOGGLE_FIXED_SIDEBAR, false)
+            storage.set(TOGGLE_CONTENT_WIDTH, CONTENT_WIDTH_TYPE.Fixed)
           }
           break
       }

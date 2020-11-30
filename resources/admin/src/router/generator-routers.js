@@ -21,7 +21,13 @@ export const constantRouterComponents = {
   'AdminUserList': () => import('@/views/setting/users/List'),
   'AdminPermissionList': () => import('@/views/setting/permissions/List'),
   'AdminRoleList': () => import('@/views/setting/roles/List'),
-  'AdminMenuList': () => import('@/views/setting/menus/List')
+  'AdminMenuList': () => import('@/views/setting/menus/List'),
+
+  'AccountCenter': () => import('@/views/account/center'),
+  'AccountSettingIndex': () => import('@/views/account/settings'),
+  'AccountBaseSettings': () => import('@/views/account/settings/BaseSetting'),
+  'AccountBindingSettings': () => import('@/views/account/settings/Binding'),
+  'AccountNotificationSettings': () => import('@/views/account/settings/Notification')
 
 }
 

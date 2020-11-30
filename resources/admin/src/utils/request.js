@@ -16,26 +16,43 @@ const request = axios.create({
 const errorHandler = (error) => {
   if (error.response) {
     const data = error.response.data
-    // 从 localstorage 获取 token
-    const token = storage.get(ACCESS_TOKEN)
-    if (error.response.status === 403) {
-      notification.error({
-        message: 'Forbidden',
-        description: data.message
-      })
-    }
-    if (error.response.status === 401 && !(data.result && data.result.isLogin)) {
-      notification.error({
-        message: 'Unauthorized',
-        description: 'Authorization verification failed'
-      })
-      if (token) {
-        store.dispatch('Logout').then(() => {
-          setTimeout(() => {
-            window.location.reload()
-          }, 1500)
+
+    switch (error.response.status) {
+      case 403:
+        notification.error({
+          message: 'Forbidden',
+          description: data.message
         })
-      }
+        break
+      case 429:
+        notification.error({
+          message: '请求频繁',
+          description: data.message
+        })
+        break
+      case 401:
+        if (data.code === 401001) {
+          notification.error({
+            message: 'Unauthorized',
+            description: data.message
+          })
+          store.dispatch('ClearToken').then(() => {
+            setTimeout(() => {
+              window.location.reload()
+            }, 1500)
+          })
+        } else {
+          notification.error({
+            message: 'Unauthorized',
+            description: 'Authorization verification failed'
+          })
+          store.dispatch('Logout').then(() => {
+            setTimeout(() => {
+              window.location.reload()
+            }, 1500)
+          })
+        }
+        break
     }
   }
   return Promise.reject(error)

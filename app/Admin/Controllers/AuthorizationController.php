@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use Illuminate\Http\Request;
 use App\Admin\Resources\MeResource;
 use Illuminate\Support\Facades\Auth;
 use App\Admin\Requests\AuthorizationRequest;
@@ -28,6 +29,17 @@ class AuthorizationController extends Controller
     public function menus(AuthorizationService $authorizationService)
     {
         return $this->response->success($authorizationService->getAuthMenus());
+    }
+
+    public function updateMe(Request $request)
+    {
+        if (! $params = $request->all()) {
+            return $this->me();
+        }
+
+        $request->user()->update($params);
+
+        return $this->me();
     }
 
     public function destroy()

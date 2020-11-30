@@ -15,6 +15,14 @@ export function getMe () {
   })
 }
 
+export function updateMe (data) {
+  return request({
+    url: '/authorizations/me',
+    method: 'put',
+    data: data
+  })
+}
+
 export function getMenu () {
   return request({
     url: '/authorizations/menus',

@@ -3,9 +3,11 @@
 namespace App\Exceptions;
 
 use Throwable;
+use App\Admin\Enums\ResponseCodeEnum;
 use App\Admin\Utils\Traits\ResponseTrait;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -52,6 +54,8 @@ class Handler extends ExceptionHandler
     {
         if ($e instanceof ValidationException) {
             $this->response->fail('Validation error', 422, $e->errors());
+        } elseif ($e instanceof TokenInvalidException) {
+            $this->response->fail('', ResponseCodeEnum::CLIENT_INVALID_TOEN);
         }
 
         return parent::render($request, $e);

@@ -1,5 +1,5 @@
 import storage from 'store'
-import { login, getMe, logout } from '@/api/auth'
+import { login, getMe, updateMe, logout } from '@/api/auth'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import { welcome } from '@/utils/util'
 
@@ -65,10 +65,28 @@ const auth = {
       })
     },
 
+    // 更新用户
+    UpdateMe ({ commit }, info) {
+      return new Promise((resolve, reject) => {
+        updateMe(info).then(response => {
+          const { data } = response
+
+          commit('SET_INFO', data)
+          commit('SET_ROLES', data.roles)
+          commit('SET_NAME', { name: data.name, welcome: welcome() })
+          commit('SET_AVATAR', data.avatar)
+
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+
     // 登出
-    Logout ({ commit, state }) {
+    Logout ({ commit }) {
       return new Promise((resolve) => {
-        logout(state.token).then(() => {
+        logout().then(() => {
           commit('SET_TOKEN', '')
           commit('SET_ROLES', [])
           storage.remove(ACCESS_TOKEN)
@@ -84,6 +102,13 @@ const auth = {
     RefreshToken ({ commit }, token) {
       storage.set(ACCESS_TOKEN, token, 7 * 24 * 60 * 60 * 1000)
       commit('SET_TOKEN', token)
+    },
+
+    // 清除 token
+    ClearToken ({ commit }) {
+      commit('SET_TOKEN', '')
+      commit('SET_ROLES', [])
+      storage.remove(ACCESS_TOKEN)
     }
 
   }

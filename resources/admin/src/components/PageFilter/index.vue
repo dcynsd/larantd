@@ -3,19 +3,54 @@
     <a-form v-if="filters.length > 0" layout="inline">
       <a-row :gutter="48">
         <template v-for="filter in filters">
-          <a-col v-if="!filter.advanced || advanced" :key="filter.field" :md="6" :sm="24">
-            <a-form-item :label="filter.label">
-              <a-input v-if="filter.type === 'input'" v-model="queryParam[filter.field]" />
+          <a-col v-if="!filter.advanced || advanced" :key="filter.field" :md="4" :sm="24">
+            <a-form-item>
+              <a-input
+                v-if="filter.type === 'input'"
+                v-model="queryParam[filter.field]"
+                :placeholder="`请输入 ${filter.label}`"
+              />
 
               <a-select
                 v-else-if="filter.type === 'select'"
                 v-model="queryParam[filter.field]"
+                :placeholder="`请选择 ${filter.label}`"
+                :options="filter.options"
+              />
+
+              <a-select
+                v-else-if="filter.type === 'mulselect'"
+                v-model="queryParam[filter.field]"
+                :placeholder="`请选择 ${filter.label}`"
+                :options="filter.options"
                 mode="multiple"
-              >
-                <a-select-option v-for="option in filter.options" :key="option.id">
-                  {{ option.title }}
-                </a-select-option>
-              </a-select>
+              />
+
+              <a-date-picker
+                style="width:100%"
+                v-else-if="filter.type === 'date'"
+                v-model="queryParam[filter.field]"
+                valueFormat="YYYY-MM-DD"
+                :placeholder="`请选择 ${filter.label}`"
+              />
+
+              <a-date-picker
+                style="width:100%"
+                v-else-if="filter.type === 'datetime'"
+                v-model="queryParam[filter.field]"
+                show-time
+                valueFormat="YYYY-MM-DD HH:mm:ss"
+                :placeholder="`请选择 ${filter.label}`"
+              />
+
+              <a-range-picker
+                style="width:100%"
+                v-else-if="filter.type === 'rangedatetime'"
+                v-model="queryParam[filter.field]"
+                show-time
+                valueFormat="YYYY-MM-DD HH:mm:ss"
+                :placeholder="[`请选择开始 ${filter.label}`, `请选择结束 ${filter.label}`]"
+              />
             </a-form-item>
           </a-col>
         </template>

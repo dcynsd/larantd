@@ -25,6 +25,9 @@ Route::prefix('admin-api')
             // 登录用户信息
             Route::get('authorizations/me', [AuthorizationController::class, 'me'])
                 ->name('authorizations.me');
+            // 更新用户信息
+            Route::put('authorizations/me', [AuthorizationController::class, 'updateMe'])
+                ->name('authorizations.me.update');
             // 菜单
             Route::get('authorizations/menus', [AuthorizationController::class, 'menus'])
                 ->name('authorizations.menus');

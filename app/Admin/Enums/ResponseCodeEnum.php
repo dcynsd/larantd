@@ -14,6 +14,7 @@ final class ResponseCodeEnum
 
     // 客户端错误码：400 ~ 499 开头，后拼接 3 位
     const CLIENT_PARAMETER_ERROR = 400000;
+    const CLIENT_INVALID_TOEN = 401001;
 
     // 服务端操作错误码：500 ~ 599 开头，后拼接 3 位
     const SYSTEM_ERROR = 500000;
@@ -22,6 +23,7 @@ final class ResponseCodeEnum
         self::SERVICE_LOGIN_SUCCESS => '登录成功',
 
         self::CLIENT_PARAMETER_ERROR => '参数错误',
+        self::CLIENT_INVALID_TOEN => '无效的token',
 
         self::SYSTEM_ERROR => '系统错误',
     ];
