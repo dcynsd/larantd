@@ -15,7 +15,7 @@
         </a-form-item>
         <a-form-item label="父级菜单">
           <a-select
-            v-decorator="['parent_id', {rules: [{required: true}]}]"
+            v-decorator="['parent_id', {rules: [{required: true, message: '请选择父级菜单'}]}]"
             option-filter-prop="children"
             :show-search="true"
             :options="treeData"

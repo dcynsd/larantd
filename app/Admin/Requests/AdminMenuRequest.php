@@ -24,4 +24,14 @@ class AdminMenuRequest extends FormRequest
                 ];
         }
     }
+
+    public function attributes()
+    {
+        return [
+            'parent_id' => '父级ID',
+            'name' => '菜单标识',
+            'title' => '菜单标题',
+            'component' => '组件名称',
+        ];
+    }
 }

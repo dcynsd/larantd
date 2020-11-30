@@ -23,7 +23,7 @@ if (! function_exists('makeFullUrl')) {
     /**
      * 获得完整 URL 地址
      * @param string|array $url
-     * @return string | array
+     * @return string|array
      */
     function makeFullUrl($url)
     {
@@ -78,9 +78,7 @@ if (! function_exists('show_tree')) {
 if (! function_exists('admin_base_path')) {
     /**
      * Get admin url.
-     *
      * @param string $path
-     *
      * @return string
      */
     function admin_base_path($path = '')

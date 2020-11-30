@@ -43,7 +43,7 @@ class AdminPermission
 
         $method = array_shift($args);
 
-        if (!method_exists(PermissionChecker::class, $method)) {
+        if (! method_exists(PermissionChecker::class, $method)) {
             throw new \InvalidArgumentException("Invalid permission method [$method].");
         }
 

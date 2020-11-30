@@ -29,4 +29,12 @@ class AdminPermissionRequest extends FormRequest
                 ];
         }
     }
+
+    public function attributes()
+    {
+        return [
+            'http_method' => '请求方法',
+            'http_path' => '请求地址',
+        ];
+    }
 }

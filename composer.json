@@ -14,6 +14,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "overtrue/laravel-lang": "~3.0",
         "tucker-eric/eloquentfilter": "^2.4",
         "tymon/jwt-auth": "^1.0"
     },
