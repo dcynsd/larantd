@@ -47,6 +47,10 @@ class AdminRoleController extends Controller
 
     public function destroy(AdminRole $adminRole)
     {
+        if ($adminRole->id === 1) {
+            $this->response->errorForbidden('超级管理员禁止删除！');
+        }
+
         $adminRole->permissions()->detach();
         $adminRole->delete();
 

@@ -2,13 +2,20 @@
   <page-header-wrapper>
     <a-card :bordered="false">
 
-      <page-filter :query-param="queryParam" :advanced="advanced" :filters="filters" />
+      <page-filter :query-param="queryParam" :advanced="advanced" :filters="filters" :selected-row-keys="selectedRowKeys" />
+
+      <a-alert v-if="selectedRowKeys.length > 0" showIcon style="margin-bottom: 16px">
+        <template slot="message">
+          <span style="margin-right: 12px">已选择: <a style="font-weight: 600">{{ selectedRowKeys.length }}</a></span>
+        </template>
+      </a-alert>
 
       <s-table
         ref="table"
         row-key="id"
         :columns="columns"
         :data="loadData"
+        :rowSelection="rowSelection"
       >
         <div slot="http_method" slot-scope="text, row">
           <a-tag v-if="checkIsEmpty(row.http_method)" color="blue">
@@ -35,7 +42,7 @@
           <span v-else>
             <a @click="handleEdit(row)">编辑</a>
             <a-divider type="vertical" />
-            <row-destroy :id="row.id" resource="admin-permissions" @ok="handleFilter" />
+            <row-destroy :id="row.id" :resource="resourceName" @ok="handleFilter" />
           </span>
         </span>
       </s-table>
@@ -73,10 +80,13 @@ export default {
   },
   data () {
     return {
+      resourceName: 'admin-permissions',
       columns: [
         {
           title: 'ID',
-          dataIndex: 'id'
+          dataIndex: 'id',
+          sorter: true,
+          needTotal: true
         },
         {
           title: '名称',
@@ -141,6 +151,14 @@ export default {
     },
     checkIsEmpty (value) {
       return _.isEmpty(value)
+    },
+    getCheckboxProps (record) {
+      return {
+        props: {
+          disabled: record.id === 1,
+          name: record.name
+        }
+      }
     }
   }
 }

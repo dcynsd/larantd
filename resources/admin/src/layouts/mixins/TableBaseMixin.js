@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import { batchDestroy } from '@/api/common'
 
 export default function (config) {
   const { getList, add, update } = config
@@ -9,11 +10,13 @@ export default function (config) {
         handleFilter: this.handleFilter,
         handleCreate: this.handleCreate,
         toggleAdvanced: this.toggleAdvanced,
-        resetSearchForm: this.resetSearchForm
+        resetSearchForm: this.resetSearchForm,
+        batchDestroy: this.batchDestroy
       }
     },
     data () {
       return {
+        resourceName: '',
         // create model
         visible: false,
         confirmLoading: false,
@@ -32,10 +35,60 @@ export default function (config) {
               this.meta = res.data.meta
               return res.data
             })
+        },
+        selectedRowKeys: [],
+        selectedRows: []
+      }
+    },
+    computed: {
+      rowSelection () {
+        return {
+          selectedRowKeys: this.selectedRowKeys,
+          onChange: this.onSelectChange,
+          getCheckboxProps: this.getCheckboxProps
         }
       }
     },
     methods: {
+      onSelectChange (selectedRowKeys, selectedRows) {
+        this.selectedRowKeys = selectedRowKeys
+        this.selectedRows = selectedRows
+      },
+      getCheckboxProps (record) {
+        return {
+          props: {
+            name: record.name
+          }
+        }
+      },
+      batchDestroy () {
+        if (!this.resourceName) {
+          this.$message.error('请配置资源名称')
+          return
+        }
+
+        if (this.selectedRowKeys.length === 0) {
+          this.$message.error('请选择')
+          return
+        }
+
+        this.$confirm({
+          title: '你确定要批量删除数据？',
+          okText: '确定',
+          okType: 'danger',
+          cancelText: '取消',
+          onOk: () => {
+            return batchDestroy(this.resourceName, { ids: this.selectedRowKeys }).then(() => {
+              this.$message.success('删除成功')
+              this.selectedRowKeys = []
+              this.selectedRows =
+              this.$refs.table.refresh(true)
+            }).catch(() => {
+              this.$message.error('删除失败')
+            })
+          }
+        })
+      },
       toggleAdvanced () {
         this.advanced = !this.advanced
       },

@@ -13,7 +13,7 @@ class AdminPermissionController extends Controller
     {
         $data = AdminPermission::query()
             ->filter($request->all())
-            ->paginate();
+            ->paginate($request->limit);
 
         return $this->response->success(AdminPermissionResource::collection($data));
     }
@@ -34,7 +34,22 @@ class AdminPermissionController extends Controller
 
     public function destroy(AdminPermission $adminPermission)
     {
+        if ($adminPermission->id === 1) {
+            $this->response->errorForbidden('禁止删除全部权限！');
+        }
+
         $adminPermission->delete();
+
+        return $this->response->noContent();
+    }
+
+    public function batchDestroy(Request $request)
+    {
+        if (! $ids = $request->input('ids', [])) {
+            $this->response->errorBadRequest('请选择');
+        }
+
+        AdminPermission::query()->whereIn('id', $ids)->delete();
 
         return $this->response->noContent();
     }

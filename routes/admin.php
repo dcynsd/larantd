@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Admin\Controllers\PageController;
 use App\Admin\Controllers\AuthorizationController;
+use App\Admin\Controllers\AdminPermissionController;
 
 Route::get('/admin/{path?}', [PageController::class, 'root'])
     ->where('path', '.*')
@@ -37,6 +38,10 @@ Route::prefix('admin-api')
             // 文件系统
             Route::resource('file-systems', 'FileSystemController')
                 ->only(['index', 'store']);
+
+            // 权限批量删除
+            Route::delete('admin-permissions/batch', [AdminPermissionController::class, 'batchDestroy'])
+                ->name('admin-permissions.batch.destroy');
 
             Route::resources([
                 'admin-permissions' => 'AdminPermissionController',

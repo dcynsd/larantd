@@ -70,6 +70,14 @@
 
     <div v-if="showCreateBtn" class="table-operator">
       <a-button type="primary" icon="plus" @click="handleCreate">新建</a-button>
+      <a-dropdown v-if="selectedRowKeys.length > 0">
+        <a-menu slot="overlay">
+          <a-menu-item key="1" @click="batchDestroy"><a-icon type="delete" />删除</a-menu-item>
+        </a-menu>
+        <a-button style="margin-left: 8px">
+          批量操作 <a-icon type="down" />
+        </a-button>
+      </a-dropdown>
     </div>
   </div>
 </template>
@@ -79,7 +87,8 @@ export default {
   name: 'PageFilter',
   inject: [
     'handleFilter', 'handleCreate',
-    'toggleAdvanced', 'resetSearchForm'
+    'toggleAdvanced', 'resetSearchForm',
+    'batchDestroy'
   ],
   props: {
     queryParam: {
@@ -97,6 +106,10 @@ export default {
     showCreateBtn: {
       type: Boolean,
       default: true
+    },
+    selectedRowKeys: {
+      type: Array,
+      default: () => []
     }
   }
 }

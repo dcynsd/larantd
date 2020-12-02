@@ -8,7 +8,7 @@ class AuthorizationService
 {
     public function getAuthMenus()
     {
-        $menus = AdminMenu::orderBy('order')->get()->map(function (AdminMenu $adminMenu) {
+        $menus = AdminMenu::orderByDesc('order')->get()->map(function (AdminMenu $adminMenu) {
 
             $data = [
                 'id' => $adminMenu->id,

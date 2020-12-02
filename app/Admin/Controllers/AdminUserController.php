@@ -49,6 +49,10 @@ class AdminUserController extends Controller
 
     public function destroy(AdminUser $adminUser)
     {
+        if ($adminUser->id === 1) {
+            $this->response->errorForbidden('超级管理员禁止删除！');
+        }
+
         $adminUser->delete();
 
         return $this->response->noContent();
