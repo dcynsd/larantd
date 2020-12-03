@@ -1,61 +1,89 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## 项目来源
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+公司项目一直用的 [Laravel-Admin](https://laravel-admin.org/ "Laravel-Admin") 作为后台，可是在某些特殊需求下，扩展十分麻烦，于是自己就决定做个简易的后台模板出来，供以后使用。
 
-## About Laravel
+后台的前端模板是基于 [Antd Pro Vue](https://pro.antdv.com/ "Antd Pro Vue") 开发，配合 [Laravel](https://laravel.com "Laravel") 框架进行接口交互。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 项目主要技术
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- 后端：PHP / Laravel / JWT
+- 前端：Vue / Ant Design Vue / Webpack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 项目功能
 
-## Learning Laravel
+- 角色权限控制
+- 动态菜单加载
+- 列表字段排序
+- 列表批量操作
+- 风格配色切换
+- ......待完善
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 项目预览
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+[http://demo.dcynsd.cn/admin](http://demo.dcynsd.cn/admin "http://demo.dcynsd.cn/admin")
 
-## Laravel Sponsors
+![](https://www.dcynsd.cn/storage/markdown/images/c49ecbc921a498f555d90f31845d5a055fc89821420c1.jpg)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## 安装
 
-### Premium Partners
+```
+git clone https://github.com/dcynsd/larantd.git 
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+```
+cd larantd
+```
 
-## Contributing
+### 后端部分
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+composer install
+```
 
-## Code of Conduct
+```
+cp .env.example .env
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+note: 注意修改 .env 文件里面数据库等配置信息
 
-## Security Vulnerabilities
+```
+php artisan key:generate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+php artisan jwt:secret
+```
 
-## License
+```
+php artisan storage:link
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+php artisan migrate
+```
+
+```
+php artisan admin:init
+```
+
+### 前端部分
+
+```
+cd resources/admin
+```
+
+```
+yarn install
+```
+
+```
+yarn run watch	// 开发模式下使用
+```
+
+```
+yarn run build	// 编译上线使用
+```
+
+## 开源地址
+
+[larantd](https://github.com/dcynsd/larantd "larantd")
