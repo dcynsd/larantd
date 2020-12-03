@@ -51,8 +51,18 @@ class AdminRoleController extends Controller
             $this->response->errorForbidden('超级管理员禁止删除！');
         }
 
-        $adminRole->permissions()->detach();
         $adminRole->delete();
+
+        return $this->response->noContent();
+    }
+
+    public function batchDestroy(Request $request)
+    {
+        if (! $ids = $request->input('ids', [])) {
+            $this->response->errorBadRequest('请选择');
+        }
+
+        AdminRole::destroy($ids);
 
         return $this->response->noContent();
     }

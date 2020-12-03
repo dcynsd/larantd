@@ -13,6 +13,15 @@ class Model extends EloquentModel
 {
     use DefaultDatetimeFormat, HasFactory, Filterable;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('order', function ($builder) {
+            $builder->orderBy(request('sortField', 'id'), request('sortOrder', 'asc'));
+        });
+    }
+
     public function syncRoleAndPermission($eloquent = null)
     {
         $model = $eloquent ?: $this;

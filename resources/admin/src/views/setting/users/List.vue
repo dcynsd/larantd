@@ -48,7 +48,7 @@
           <span v-else>
             <a @click="handleEdit(row)">编辑</a>
             <a-divider type="vertical" />
-            <row-destroy :id="row.id" resource="admin-users" @ok="handleFilter" />
+            <row-destroy :id="row.id" :resource="resourceName" @ok="handleFilter" />
           </span>
         </span>
       </s-table>
@@ -85,6 +85,7 @@ export default {
   },
   data () {
     return {
+      resourceName: 'admin-users',
       columns: [
         {
           title: 'ID',

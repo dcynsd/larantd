@@ -85,8 +85,7 @@ export default {
         {
           title: 'ID',
           dataIndex: 'id',
-          sorter: true,
-          needTotal: true
+          sorter: true
         },
         {
           title: '名称',

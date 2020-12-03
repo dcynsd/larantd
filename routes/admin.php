@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Admin\Controllers\PageController;
+use App\Admin\Controllers\AdminRoleController;
 use App\Admin\Controllers\AuthorizationController;
 use App\Admin\Controllers\AdminPermissionController;
 
@@ -42,6 +43,9 @@ Route::prefix('admin-api')
             // 权限批量删除
             Route::delete('admin-permissions/batch', [AdminPermissionController::class, 'batchDestroy'])
                 ->name('admin-permissions.batch.destroy');
+            // 角色批量删除
+            Route::delete('admin-roles/batch', [AdminRoleController::class, 'batchDestroy'])
+                ->name('admin-roles.batch.destroy');
 
             Route::resources([
                 'admin-permissions' => 'AdminPermissionController',

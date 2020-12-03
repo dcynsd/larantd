@@ -49,7 +49,7 @@ class AdminPermissionController extends Controller
             $this->response->errorBadRequest('请选择');
         }
 
-        AdminPermission::query()->whereIn('id', $ids)->delete();
+        AdminPermission::destroy($ids);
 
         return $this->response->noContent();
     }
