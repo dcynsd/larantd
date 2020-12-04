@@ -157,6 +157,11 @@ export default {
       )
 
       const query = { ...this.$route.query }
+
+      if (parameter.sortOrder === undefined || parameter.sortOrder === 'undefined') {
+        query.sortOrder = 'asc'
+      }
+
       _.forEach(parameter, (val, key) => {
         if (typeof val === 'string') {
           val = val.trim()

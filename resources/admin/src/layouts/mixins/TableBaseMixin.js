@@ -12,11 +12,13 @@ export default function (config) {
         toggleAdvanced: this.toggleAdvanced,
         resetSearchForm: this.resetSearchForm,
         batchDestroy: this.batchDestroy,
-        handleRefresh: this.handleRefresh
+        handleRefresh: this.handleRefresh,
+        loadingObj: this.loadingObj
       }
     },
     data () {
       return {
+        // 资源名称
         resourceName: '',
         // create model
         visible: false,
@@ -38,7 +40,10 @@ export default function (config) {
             })
         },
         selectedRowKeys: [],
-        selectedRows: []
+        selectedRows: [],
+        loadingObj: {
+          refreshLoading: false
+        }
       }
     },
     computed: {
@@ -53,16 +58,19 @@ export default function (config) {
     watch: {
       $route: {
         handler () {
+          // 监听路由变化，并设置参数请求
           this.setFormValueFromQuery()
         },
         immediate: true
       }
     },
     methods: {
+      // 行选择事件
       onSelectChange (selectedRowKeys, selectedRows) {
         this.selectedRowKeys = selectedRowKeys
         this.selectedRows = selectedRows
       },
+      // 获取多选处理
       getCheckboxProps (record) {
         return {
           props: {
@@ -70,6 +78,7 @@ export default function (config) {
           }
         }
       },
+      // 批量删除
       batchDestroy () {
         if (!this.resourceName) {
           this.$message.error('请配置资源名称')
@@ -98,9 +107,11 @@ export default function (config) {
           }
         })
       },
+      // 点击展开事件
       toggleAdvanced () {
         this.advanced = !this.advanced
       },
+      // 点击查询按钮筛选事件
       handleFilter () {
         const query = {}
         _.forEach(this.queryParam, (val, key) => {
@@ -117,6 +128,7 @@ export default function (config) {
           query
         })
       },
+      // 从地址栏获取并设置请求参数
       setFormValueFromQuery () {
         const query = this.$route.query
 
@@ -129,9 +141,15 @@ export default function (config) {
           this.$refs.table.refresh(true)
         })
       },
+      // 处理刷新按钮事件
       handleRefresh () {
+        this.loadingObj.refreshLoading = true
         this.$refs.table.refresh()
+        setTimeout(() => {
+          this.loadingObj.refreshLoading = false
+        }, 500)
       },
+      // 重置筛选表单
       resetSearchForm () {
         this.queryParam = {}
 
@@ -139,19 +157,23 @@ export default function (config) {
           path: this.$route.path
         })
       },
+      // 处理新增按钮事件
       handleCreate () {
         this.mdl = null
         this.visible = true
       },
+      // 处理行编辑事件
       handleEdit (row) {
         this.visible = true
         this.mdl = { ...row }
       },
+      // 处理表单模态框取消事件
       handleCancel () {
         this.visible = false
         const form = this.$refs.createModal.form
         form.resetFields() // 清理表单数据（可不做）
       },
+      // 处理表单模态框新增或者修改事件
       handleOk () {
         const form = this.$refs.createModal.form
         this.confirmLoading = true

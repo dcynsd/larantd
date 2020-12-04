@@ -20,7 +20,7 @@ import './core/lazy_use' // use lazy load components
 import './permission' // permission control
 import './utils/filter' // global filter
 import './global.less' // global style
-import { STable, PageFilter, RowDestroy } from '@/components'
+import { STable, PageFilter, PageAction, RowDestroy } from '@/components'
 
 Vue.config.productionTip = false
 
@@ -32,6 +32,7 @@ Vue.component('page-container', PageHeaderWrapper)
 Vue.component('page-header-wrapper', PageHeaderWrapper)
 Vue.component('s-table', STable)
 Vue.component('page-filter', PageFilter)
+Vue.component('page-action', PageAction)
 Vue.component('row-destroy', RowDestroy)
 
 window.umi_plugin_ant_themeVar = themePluginConfig.theme

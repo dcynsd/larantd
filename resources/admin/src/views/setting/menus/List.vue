@@ -2,7 +2,7 @@
   <page-header-wrapper>
     <a-card :bordered="false">
 
-      <page-filter :query-param="queryParam" :advanced="advanced" :filters="filters" />
+      <page-action :refresh-btn="false" />
 
       <s-table
         ref="table"

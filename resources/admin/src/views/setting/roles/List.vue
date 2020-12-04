@@ -1,14 +1,11 @@
 <template>
   <page-header-wrapper>
+
+    <page-filter :query-param="queryParam" :advanced="advanced" :filters="filters" />
+
     <a-card :bordered="false">
 
-      <page-filter :query-param="queryParam" :advanced="advanced" :filters="filters" :selected-row-keys="selectedRowKeys" />
-
-      <a-alert v-if="selectedRowKeys.length > 0" showIcon style="margin-bottom: 16px">
-        <template slot="message">
-          <span style="margin-right: 12px">已选择: <a style="font-weight: 600">{{ selectedRowKeys.length }}</a></span>
-        </template>
-      </a-alert>
+      <page-action :selected-row-keys="selectedRowKeys" />
 
       <s-table
         ref="table"

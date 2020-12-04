@@ -1,8 +1,11 @@
 <template>
   <page-header-wrapper>
+
+    <page-filter :query-param="queryParam" :advanced="advanced" :filters="filters" />
+
     <a-card :bordered="false">
 
-      <page-filter :query-param="queryParam" :advanced="advanced" :filters="filters" />
+      <page-action />
 
       <s-table
         ref="table"

@@ -1,14 +1,10 @@
 <template>
   <page-header-wrapper>
+    <page-filter :query-param="queryParam" :advanced="advanced" :filters="filters" />
+
     <a-card :bordered="false">
 
-      <page-filter :query-param="queryParam" :advanced="advanced" :filters="filters" :selected-row-keys="selectedRowKeys" />
-
-      <a-alert v-if="selectedRowKeys.length > 0" showIcon style="margin-bottom: 16px">
-        <template slot="message">
-          <span style="margin-right: 12px">已选择: <a style="font-weight: 600">{{ selectedRowKeys.length }}</a></span>
-        </template>
-      </a-alert>
+      <page-action :selected-row-keys="selectedRowKeys" />
 
       <s-table
         ref="table"
@@ -122,6 +118,12 @@ export default {
       ],
       filters: [
         {
+          field: 'id',
+          advanced: false,
+          label: 'ID',
+          type: 'input'
+        },
+        {
           field: 'name',
           advanced: false,
           label: '名称',
@@ -132,6 +134,29 @@ export default {
           advanced: false,
           label: '标识',
           type: 'input'
+        },
+        {
+          field: 'http_method',
+          advanced: true,
+          label: '请求方法',
+          type: 'input'
+        },
+        {
+          field: 'http_path',
+          advanced: true,
+          label: '请求地址',
+          type: 'input'
+        },
+        {
+          field: 'created_at',
+          advanced: true,
+          label: '创建时间',
+          type: 'rangedatetime'
+        }, {
+          field: 'updated_at',
+          advanced: true,
+          label: '更新时间',
+          type: 'datetime'
         }
       ]
     }

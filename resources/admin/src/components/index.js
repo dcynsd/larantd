@@ -27,6 +27,7 @@ import ArticleListContent from '@/components/ArticleListContent'
 
 import Dialog from '@/components/Dialog'
 import PageFilter from '@/components/PageFilter'
+import PageAction from '@/components/PageAction'
 import RowDestroy from '@/components/RowDestroy'
 
 export {
@@ -56,5 +57,6 @@ export {
 
   Dialog,
   PageFilter,
+  PageAction,
   RowDestroy
 }
