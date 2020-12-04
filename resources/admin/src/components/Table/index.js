@@ -1,5 +1,6 @@
 import T from 'ant-design-vue/es/table/Table'
 import get from 'lodash.get'
+import _ from 'lodash'
 
 export default {
   data () {
@@ -107,15 +108,15 @@ export default {
     }
   },
   created () {
-    const { pageNo } = this.$route.params
-    const localPageNum = this.pageURI && (pageNo && parseInt(pageNo)) || this.pageNum
+    const { page, limit } = this.$route.query
+    const localPageNum = this.pageURI && (page && parseInt(page)) || this.pageNum
     this.localPagination = ['auto', true].includes(this.showPagination) && Object.assign({}, this.localPagination, {
       current: localPageNum,
-      pageSize: this.pageSize,
+      pageSize: (limit && parseInt(limit)) || this.pageSize,
       showSizeChanger: this.showSizeChanger
     }) || false
     this.needTotalList = this.initTotalList(this.columns)
-    this.loadData()
+    // this.loadData()
   },
   methods: {
     /**
@@ -127,7 +128,9 @@ export default {
       bool && (this.localPagination = Object.assign({}, {
         current: 1, pageSize: this.pageSize
       }))
-      this.loadData()
+      const { limit } = this.$route.query
+      this.localPagination.pageSize = (limit && parseInt(limit)) || this.pageSize
+      this.newLoadData()
     },
     /**
      * 加载数据方法
@@ -136,7 +139,7 @@ export default {
      * @param {Object} sorter 排序条件
      */
     loadData (pagination, filters, sorter) {
-      this.localLoading = true
+      // this.localLoading = true
       const parameter = Object.assign({
         page: (pagination && pagination.current) ||
           this.showPagination && this.localPagination.current || this.pageNum,
@@ -152,7 +155,25 @@ export default {
         ...filters
       }
       )
-      const result = this.data(parameter)
+
+      const query = { ...this.$route.query }
+      _.forEach(parameter, (val, key) => {
+        if (typeof val === 'string') {
+          val = val.trim()
+        }
+        if (val !== '' && val !== undefined) {
+          query[key] = val
+        }
+      })
+
+      this.$router.push({
+        path: this.$route.path,
+        query
+      })
+    },
+    newLoadData () {
+      this.localLoading = true
+      const result = this.data()
       // 对接自己的通用数据接口需要修改下方代码中的 r.pageNo, r.totalCount, r.data
       // eslint-disable-next-line
       if ((typeof result === 'object' || typeof result === 'function') && typeof result.then === 'function') {
@@ -161,8 +182,7 @@ export default {
             current: r.meta.pagination.current_page, // 返回结果中的当前分页数
             total: r.meta.pagination.total, // 返回结果中的总记录数
             showSizeChanger: this.showSizeChanger,
-            pageSize: (pagination && pagination.pageSize) ||
-              this.localPagination.pageSize
+            pageSize: this.localPagination.pageSize
           }) || false
           // 为防止删除数据后导致页面当前页面数据长度为 0 ,自动翻页到上一页
           if (r.data.length === 0 && this.showPagination && this.localPagination.current > 1) {

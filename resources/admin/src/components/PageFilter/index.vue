@@ -78,6 +78,7 @@
           批量操作 <a-icon type="down" />
         </a-button>
       </a-dropdown>
+      <a-button type="primary" icon="redo" @click="handleRefresh">刷新</a-button>
     </div>
   </div>
 </template>
@@ -88,7 +89,7 @@ export default {
   inject: [
     'handleFilter', 'handleCreate',
     'toggleAdvanced', 'resetSearchForm',
-    'batchDestroy'
+    'batchDestroy', 'handleRefresh'
   ],
   props: {
     queryParam: {

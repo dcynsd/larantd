@@ -11,7 +11,8 @@ export default function (config) {
         handleCreate: this.handleCreate,
         toggleAdvanced: this.toggleAdvanced,
         resetSearchForm: this.resetSearchForm,
-        batchDestroy: this.batchDestroy
+        batchDestroy: this.batchDestroy,
+        handleRefresh: this.handleRefresh
       }
     },
     data () {
@@ -47,6 +48,14 @@ export default function (config) {
           onChange: this.onSelectChange,
           getCheckboxProps: this.getCheckboxProps
         }
+      }
+    },
+    watch: {
+      $route: {
+        handler () {
+          this.setFormValueFromQuery()
+        },
+        immediate: true
       }
     },
     methods: {
@@ -93,11 +102,42 @@ export default function (config) {
         this.advanced = !this.advanced
       },
       handleFilter () {
-        this.$refs.table.refresh(true)
+        const query = {}
+        _.forEach(this.queryParam, (val, key) => {
+          if (typeof val === 'string') {
+            val = val.trim()
+          }
+          if (val !== '' && val !== undefined) {
+            query[key] = val
+          }
+        })
+
+        this.$router.push({
+          path: this.$route.path,
+          query
+        })
+      },
+      setFormValueFromQuery () {
+        const query = this.$route.query
+
+         _.forEach(query, (val, key) => {
+          val = query[key]
+          this.$set(this.queryParam, key, val)
+        })
+
+        this.$nextTick(() => {
+          this.$refs.table.refresh(true)
+        })
+      },
+      handleRefresh () {
+        this.$refs.table.refresh()
       },
       resetSearchForm () {
         this.queryParam = {}
-        this.$refs.table.refresh(true)
+
+        this.$router.push({
+          path: this.$route.path
+        })
       },
       handleCreate () {
         this.mdl = null
