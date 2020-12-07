@@ -2,7 +2,6 @@
 
 namespace App\Admin\Models;
 
-use App\Admin\Utils\Admin;
 use App\Admin\Utils\Traits\HasPermission;
 
 class AdminMenu extends Model

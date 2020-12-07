@@ -38,7 +38,7 @@ const auth = {
       return new Promise((resolve, reject) => {
         login(userInfo).then(response => {
           const { token } = response.data
-          storage.set(ACCESS_TOKEN, token, 7 * 24 * 60 * 60 * 1000)
+          storage.set(ACCESS_TOKEN, token)
           commit('SET_TOKEN', token)
           resolve()
         }).catch(error => {
@@ -100,7 +100,7 @@ const auth = {
 
     // 刷新 token
     RefreshToken ({ commit }, token) {
-      storage.set(ACCESS_TOKEN, token, 7 * 24 * 60 * 60 * 1000)
+      storage.set(ACCESS_TOKEN, token)
       commit('SET_TOKEN', token)
     },
 

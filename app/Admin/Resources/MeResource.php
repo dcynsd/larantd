@@ -18,7 +18,7 @@ class MeResource extends JsonResource
             'id' => $this->id,
             'username' => $this->username,
             'name' => $this->name,
-            'avatar' => $this->avatar,
+            'avatar' => makeFullUrl($this->avatar),
             'roles' => $this->roles()->select('name', 'slug')->get(),
         ];
     }
